@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:music_app/Services/utils.dart';
+import 'package:music_app/View/On%20Boarding/onboarding_view.dart';
 import 'package:music_app/View/Splash%20View/splash_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -15,8 +16,9 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    Timer(Duration(seconds: 2), () {
-      print("Timer Completed");
+    Timer( const Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const  OnboardingView()));
     });
 
     super.initState();
