@@ -1,5 +1,6 @@
+
 import 'package:flutter/material.dart';
 
-class SplashViewmodel with ChangeNotifier{
-  
+class SplashViewmodel with ChangeNotifier {
+
 }
