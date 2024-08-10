@@ -17,46 +17,74 @@ class _OnboardingViewState extends State<OnboardingView> {
     final screenWidth = MediaQuery.of(context).size.width;
     final model = Provider.of<OnboardingViewmodel>(context);
     return Scaffold(
-      backgroundColor: Utils.bluePrimary.withOpacity(0.9),
+      backgroundColor: Utils.bluePrimary,
       body: Stack(
         children: [
           Align(
-            alignment: Alignment.topCenter,
+            alignment: Alignment.center,
             child: Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.060),
+                padding: EdgeInsets.only(top: screenHeight * 0.060),
+                child: Image(
+                  image: AssetImage("assets/image/img_girl.png"),
+                  height: screenHeight * 0.450,
+                )),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: screenHeight * 0.300,
+              decoration: BoxDecoration(
+                  color: Utils.black.withOpacity(0.9),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(screenWidth * 0.120),
+                      topRight: Radius.circular(screenWidth * 0.120))),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        right: screenWidth * 0.060, left: screenWidth * 0.050),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: screenHeight * 0.130,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Utils.roundBlue,
-                              width: 10, // adjust the width to your liking
-                              style: BorderStyle.solid,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.5),
-                                spreadRadius: -10,
-                                blurRadius: 10,
-                              ),
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                spreadRadius: -5,
-                                blurRadius: 5,
-                              ),
-                            ],
+                  Center(
+                    child: Text.rich(
+                      style: TextStyle(
+                          fontSize: screenHeight * 0.027,
+                          fontFamily: "Century Gothic",
+                          fontWeight: FontWeight.bold),
+                      TextSpan(
+                        text: '       From ', // White text
+                        style: TextStyle(
+                          color: Utils.white,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Latest', // Blue text
+                            style: TextStyle(color: Utils.bluePrimary),
                           ),
-                        )
-                      ],
+                          TextSpan(
+                            text: ' to the \n', // White text
+                            style: TextStyle(color: Utils.white),
+                          ),
+                          TextSpan(
+                            text: '     Greatest', // Blue text
+                            style: TextStyle(color: Utils.bluePrimary),
+                          ),
+                          TextSpan(
+                            text:
+                                ' hits, Play your\n favourite tracks on ', // White text
+                            style: TextStyle(color: Utils.white),
+                          ),
+                          TextSpan(
+                            text: 'musium \n', // Blue text
+                            style: TextStyle(color: Utils.bluePrimary),
+                          ),
+                          TextSpan(
+                              text: '                  Now!',
+                              style: TextStyle(color: Utils.white))
+                        ],
+                      ),
                     ),
                   ),
+              SizedBox()
+              
+              
                 ],
               ),
             ),
