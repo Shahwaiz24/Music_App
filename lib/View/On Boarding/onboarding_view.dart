@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/Custom%20Widgets/button_container.dart';
 import 'package:music_app/Services/utils.dart';
+import 'package:music_app/View/Get%20In/getin_view.dart';
 import 'package:music_app/View/On%20Boarding/onboarding_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -119,23 +121,27 @@ class _OnboardingViewState extends State<OnboardingView> {
                   Padding(
                     padding: EdgeInsets.only(
                         left: screenWidth * 0.070, right: screenWidth * 0.070),
-                    child: Container(
-                      height: screenHeight * 0.070,
-                      decoration: BoxDecoration(
-                          color: Utils.bluePrimary,
-                          borderRadius: BorderRadius.horizontal(
-                              left: Radius.circular(screenWidth * 0.070),
-                              right: Radius.circular(screenWidth * 0.070))),
-                      child: Center(
-                        child: Text(
-                          "Get Started",
-                          style: TextStyle(
-                              color: Utils.white,
-                              fontSize: screenHeight * 0.020,
-                              fontFamily: "Mulish Bold"),
-                        ),
-                      ),
-                    ),
+                    child: InkWell(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const GetinView()));
+                        },
+                        child: ButtonContainer(
+                          isSimple: false,
+                          screenHeight: screenHeight,
+                          screenWidth: screenWidth,
+                          child: Center(
+                            child: Text(
+                              "Get Started",
+                              style: TextStyle(
+                                  color: Utils.white,
+                                  fontSize: screenHeight * 0.020,
+                                  fontFamily: "Mulish Bold"),
+                            ),
+                          ),
+                        )),
                   )
                 ],
               ),

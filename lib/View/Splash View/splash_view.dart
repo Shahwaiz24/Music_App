@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:music_app/Custom%20Widgets/app_logo_widget.dart';
 import 'package:music_app/Services/utils.dart';
 import 'package:music_app/View/On%20Boarding/onboarding_view.dart';
 import 'package:music_app/View/Splash%20View/splash_viewmodel.dart';
@@ -39,12 +40,11 @@ class _SplashViewState extends State<SplashView> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image(
-                image: AssetImage(
-                  "assets/image/logo.png",
-                ),
-                height: screenHeight * 0.250,
-              ),
+              AppLogoWidget(
+                  screenHeight: screenHeight,
+                  screenWidth: screenWidth,
+                  imageWidth: 0,
+                  imageHeight: 0.250),
               Image(
                 image: AssetImage(
                   "assets/image/musium.png",
