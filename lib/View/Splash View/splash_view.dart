@@ -46,7 +46,7 @@ class _SplashViewState extends State<SplashView> {
                   imageWidth: 0,
                   imageHeight: 0.250),
               Image(
-                image: AssetImage(
+                image: const AssetImage(
                   "assets/image/musium.png",
                 ),
                 height: screenHeight * 0.080,

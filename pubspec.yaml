@@ -86,6 +86,9 @@ flutter:
     - family: Century Gothic
       fonts:
         - asset: assets/fonts/CenturyGothic.ttf
+    - family: Century Gothic Bold
+      fonts:
+        - asset: assets/fonts/century-gothic-bold.ttf
     - family: Mulish Bold
       fonts:
         - asset: assets/fonts/Mulish-Bold.ttf
