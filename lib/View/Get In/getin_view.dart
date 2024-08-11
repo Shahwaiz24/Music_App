@@ -141,8 +141,10 @@ class _GetinViewState extends State<GetinView> {
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.050),
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const LoginView()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginView()));
                   },
                   child: ButtonContainer(
                       isSimple: false,
