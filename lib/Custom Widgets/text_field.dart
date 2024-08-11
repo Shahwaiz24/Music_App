@@ -6,10 +6,13 @@ class TextFieldWigdet extends StatefulWidget {
       {super.key,
       required this.editingController,
       required this.isObsecure,
+      required this.suffixIcon,
+      required this.isSufix,
       required this.hint,
       required this.fontFamily,
       required this.screenHeight,
       required this.radius,
+      required this.PrefixIcon,
       required this.fontsize,
       required this.screenWidth});
 
@@ -18,8 +21,11 @@ class TextFieldWigdet extends StatefulWidget {
   final String hint;
   final double screenHeight;
   final fontsize;
+  final Widget suffixIcon;
+  final bool isSufix;
   final fontFamily;
   final double screenWidth;
+  final Widget PrefixIcon;
   final radius;
 
   @override
@@ -32,17 +38,16 @@ class _TextFieldWigdetState extends State<TextFieldWigdet> {
     return TextFormField(
       controller: widget.editingController,
       obscureText: widget.isObsecure,
+      style: TextStyle(color: Utils.white.withOpacity(0.9)),
       obscuringCharacter: "*",
       decoration: InputDecoration(
         hintText: widget.hint,
         hintStyle: TextStyle(
-            color: Utils.white.withOpacity(0.5),
+            color: Utils.white.withOpacity(0.9),
             fontSize: widget.screenHeight * widget.fontsize,
             fontFamily: widget.fontFamily),
-        prefixIcon: Icon(
-          Icons.email_outlined,
-          color: Utils.white.withOpacity(0.3),
-        ),
+        prefixIcon: widget.PrefixIcon,
+        suffixIcon: widget.isSufix == true ? widget.suffixIcon : Text(""),
         filled: true,
         fillColor: Utils.blackPrimary, // Background color for the text field
         border: OutlineInputBorder(
