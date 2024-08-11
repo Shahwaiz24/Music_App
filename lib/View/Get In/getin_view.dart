@@ -134,6 +134,7 @@ class _GetinViewState extends State<GetinView> {
                   ],
                 ),
               ),
+             
               SizedBox(
                 height: screenHeight * 0.030,
               ),

@@ -38,6 +38,8 @@ class _LoginViewState extends State<LoginView> {
                   children: [
                     InkWell(
                       onTap: () {
+                        loginEmailController.clear();
+                        loginPasswordController.clear();
                         Navigator.pop(context);
                       },
                       child: Icon(
@@ -146,6 +148,107 @@ class _LoginViewState extends State<LoginView> {
                     screenHeight: screenHeight,
                     screenWidth: screenWidth),
               ),
+              SizedBox(
+                height: screenHeight * 0.020,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: screenWidth * 0.060, right: screenWidth * 0.060),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: screenHeight * 0.002,
+                        decoration: BoxDecoration(color: Utils.white),
+                      ),
+                    ),
+                    SizedBox(
+                      width: screenWidth * 0.020,
+                    ),
+                    Text(
+                      'or continue with',
+                      style: TextStyle(
+                          color: Utils.white,
+                          fontFamily: "Mulish Bold",
+                          fontSize: screenHeight * 0.020),
+                    ),
+                    SizedBox(width: screenWidth * 0.020),
+                    Expanded(
+                      child: Container(
+                        height: screenHeight * 0.002,
+                        decoration: BoxDecoration(color: Utils.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: screenHeight * 0.010,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.040),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: screenWidth * 0.120),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                                color: Utils.white.withOpacity(0.5), width: 1)),
+                        height: screenHeight * 0.100,
+                        width: screenWidth * 0.150,
+                        child: Image(
+                          image: AssetImage(
+                            "assets/image/facebook.png",
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: Utils.white.withOpacity(0.5), width: 1)),
+                      height: screenHeight * 0.100,
+                      width: screenWidth * 0.150,
+                      child: Image(
+                        image: AssetImage("assets/image/google.png"),
+                        fit: BoxFit.none,
+                        height: screenHeight * 0.010,
+                        width: screenWidth * 0.010,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: screenHeight * 0.010,
+              ),
+              Center(
+                child: InkWell(
+                  onTap: () {
+                    print("Navigating to SignUp");
+                  },
+                  child: Text.rich(
+                    TextSpan(
+                        text: "Don’t have an account?",
+                        style: TextStyle(
+                            color: Utils.white,
+                            fontFamily: "Mulish Regular",
+                            fontSize: screenHeight * 0.020),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: " SignUp",
+                              style: TextStyle(
+                                  color: Utils.blueText,
+                                  fontFamily: "Mulish Regular",
+                                  fontSize: screenHeight * 0.020))
+                        ]),
+                  ),
+                ),
+              )
             ],
           ),
         ),
