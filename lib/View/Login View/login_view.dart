@@ -13,7 +13,10 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Utils.blackPrimary,
-      
+      body: Column(
+        
+        children: [],
+      ),
     );
   }
 }
