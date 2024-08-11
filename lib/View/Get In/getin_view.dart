@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_app/Custom%20Widgets/app_logo_widget.dart';
 import 'package:music_app/Custom%20Widgets/button_container.dart';
 import 'package:music_app/Services/utils.dart';
+import 'package:music_app/View/Login%20View/login_view.dart';
 
 class GetinView extends StatefulWidget {
   const GetinView({super.key});
@@ -138,19 +139,25 @@ class _GetinViewState extends State<GetinView> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.050),
-                child: ButtonContainer(
-                    isSimple: false,
-                    screenHeight: screenHeight,
-                    screenWidth: screenWidth,
-                    child: Center(
-                      child: Text(
-                        "Login with Password",
-                        style: TextStyle(
-                            color: Utils.white,
-                            fontFamily: "Mulish Bold",
-                            fontSize: screenHeight * 0.020),
-                      ),
-                    )),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const LoginView()));
+                  },
+                  child: ButtonContainer(
+                      isSimple: false,
+                      screenHeight: screenHeight,
+                      screenWidth: screenWidth,
+                      child: Center(
+                        child: Text(
+                          "Login with Password",
+                          style: TextStyle(
+                              color: Utils.white,
+                              fontFamily: "Mulish Bold",
+                              fontSize: screenHeight * 0.020),
+                        ),
+                      )),
+                ),
               ),
               SizedBox(
                 height: screenHeight * 0.030,

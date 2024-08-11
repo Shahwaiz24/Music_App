@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/View/Login%20View/login_viewmodel.dart';
 import 'package:music_app/View/On%20Boarding/onboarding_viewmodel.dart';
 import 'package:music_app/View/Splash%20View/splash_view.dart';
 import 'package:music_app/View/Splash%20View/splash_viewmodel.dart';
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => SplashViewmodel()),
-      ChangeNotifierProvider(create: (_) => OnboardingViewmodel())
+      ChangeNotifierProvider(create: (_) => OnboardingViewmodel()),
+      ChangeNotifierProvider(create: (_) => LoginViewModel()),
     ],
     child: const MaterialApp(
       debugShowCheckedModeBanner: false,
