@@ -4,6 +4,7 @@ import 'package:music_app/Custom%20Widgets/button_container.dart';
 import 'package:music_app/Custom%20Widgets/text_field.dart';
 import 'package:music_app/Services/utils.dart';
 import 'package:music_app/View/Login%20View/login_viewmodel.dart';
+import 'package:music_app/View/Sign%20Up/signup_view.dart';
 import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
@@ -136,17 +137,19 @@ class _LoginViewState extends State<LoginView> {
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.050),
                 child: ButtonContainer(
                     isSimple: false,
-                    child: Center(
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Utils.white,
-                            fontFamily: "Mulish Bold",
-                            fontSize: screenHeight * 0.020),
-                      ),
-                    ),
+                    
                     screenHeight: screenHeight,
-                    screenWidth: screenWidth),
+                    screenWidth: screenWidth,
+                  child: Center(
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                          color: Utils.white,
+                          fontFamily: "Mulish Bold",
+                          fontSize: screenHeight * 0.020),
+                    ),
+                  ),
+                ),
               ),
               SizedBox(
                 height: screenHeight * 0.020,
@@ -230,6 +233,8 @@ class _LoginViewState extends State<LoginView> {
                 child: InkWell(
                   onTap: () {
                     print("Navigating to SignUp");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SignupView()));
                   },
                   child: Text.rich(
                     TextSpan(
