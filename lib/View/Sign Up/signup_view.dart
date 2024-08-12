@@ -24,6 +24,7 @@ class _SignupViewState extends State<SignupView> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+    final model = Provider.of<SignUpViewModel>(context, listen: false);
     return Scaffold(
       backgroundColor: Utils.blackPrimary,
       body: SingleChildScrollView(
