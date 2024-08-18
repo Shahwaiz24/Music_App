@@ -6,6 +6,7 @@ import 'package:music_app/http_model/http_model.dart';
 class LoginViewModel with ChangeNotifier {
   bool isHide = true;
   bool isLoginLoading = false;
+  bool failureResponse = false;
 
   enableHiding() {
     isHide = !isHide;
@@ -15,6 +16,7 @@ class LoginViewModel with ChangeNotifier {
   login({required UserloginModel body}) async {
     try {
       isLoginLoading = true;
+      failureResponse = false;
       notifyListeners();
       final Map<String, dynamic> response = await ApiService.login(body: body);
 
@@ -26,6 +28,7 @@ class LoginViewModel with ChangeNotifier {
         print("Status: ${response['status']} | UserData: ${response['user']}");
       } else {
         isLoginLoading = false;
+        failureResponse = true;
 
         loginEmailController.clear();
         loginPasswordController.clear();
