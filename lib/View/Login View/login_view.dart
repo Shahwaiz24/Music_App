@@ -4,7 +4,8 @@ import 'package:music_app/Custom%20Widgets/button_container.dart';
 import 'package:music_app/Custom%20Widgets/text_field.dart';
 import 'package:music_app/Services/utils.dart';
 import 'package:music_app/View/Login%20View/login_viewmodel.dart';
-import 'package:music_app/View/Sign%20Up/signup_view.dart';
+import 'package:music_app/View/Sign%20Up%20View/signup_view.dart';
+import 'package:music_app/http_model/http_model.dart';
 import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
@@ -134,23 +135,39 @@ class _LoginViewState extends State<LoginView> {
                 height: screenHeight * 0.030,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.050),
-                child: ButtonContainer(
-                    isSimple: false,
-                    
-                    screenHeight: screenHeight,
-                    screenWidth: screenWidth,
-                  child: Center(
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                          color: Utils.white,
-                          fontFamily: "Mulish Bold",
-                          fontSize: screenHeight * 0.020),
-                    ),
-                  ),
-                ),
-              ),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: screenWidth * 0.050),
+                  child: Consumer<LoginViewModel>(
+                      builder: (context, value, child) {
+                    return InkWell(
+                      onTap: () {
+                        value.login(
+                            body: UserloginModel(
+                                email: loginEmailController.text,
+                                password: loginPasswordController.text));
+                      },
+                      child: ButtonContainer(
+                        isSimple: false,
+                        screenHeight: screenHeight,
+                        screenWidth: screenWidth,
+                        child: value.isLoginLoading == true
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: Utils.white,
+                                ),
+                              )
+                            : Center(
+                                child: Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      color: Utils.white,
+                                      fontFamily: "Mulish Bold",
+                                      fontSize: screenHeight * 0.020),
+                                ),
+                              ),
+                      ),
+                    );
+                  })),
               SizedBox(
                 height: screenHeight * 0.020,
               ),

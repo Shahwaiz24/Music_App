@@ -3,7 +3,7 @@ import 'package:music_app/Custom%20Widgets/app_logo_widget.dart';
 import 'package:music_app/Custom%20Widgets/button_container.dart';
 import 'package:music_app/Services/utils.dart';
 import 'package:music_app/View/Login%20View/login_view.dart';
-import 'package:music_app/View/Sign%20Up/signup_view.dart';
+import 'package:music_app/View/Sign%20Up%20View/signup_view.dart';
 
 class GetinView extends StatefulWidget {
   const GetinView({super.key});

@@ -9,27 +9,32 @@ class ApiService {
   static login({
     required UserloginModel body,
   }) async {
-    final url = "${mainUrl}login";
-    final clientUrl = Uri.parse(url);
-    final bodyJson =  jsonEncode(body);
-    var response = await http.post(
-      clientUrl,
-      body: bodyJson,
-      headers: {"Content-Type": "application/json"},
-    );
+    try {
+      final url = "${mainUrl}login";
+      final clientUrl = Uri.parse(url);
+      final bodyJson = jsonEncode(body.toJson());
+      var response = await http.post(
+        clientUrl,
+        body: bodyJson,
+        headers: {"Content-Type": "application/json"},
+      );
 
-    final responseData = json.decode(response.body);
+      final responseData = json.decode(response.body);
 
-    if (response.statusCode == 200) {
-      return {
-        "status": responseData["status"],
-        "user": responseData["response"][0], // Yeh first user object ko return kar raha hai
-      };
-    } else {
-      return {
-        "status": responseData["status"],
-        "error": responseData["response"],
-      };
+      if (response.statusCode == 200) {
+        return {
+          "status": responseData["status"],
+          "user": responseData["response"][0],
+        };
+      } else {
+        return {
+          "status": responseData["status"],
+          "error": responseData["response"],
+        };
+      }
+    } on Exception catch (e) {
+      print("Api Erorr: ${e}");
+      // TODO
     }
   }
 }
