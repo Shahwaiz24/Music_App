@@ -41,6 +41,7 @@ class _LoginViewState extends State<LoginView> {
                     onTap: () {
                       loginEmailController.clear();
                       loginPasswordController.clear();
+                      model.failureResponse = false;
                       Navigator.pop(context);
                     },
                     child: Icon(
@@ -146,7 +147,7 @@ class _LoginViewState extends State<LoginView> {
                           SizedBox(
                             width: screenWidth * 0.020,
                           ),
-                          Text('Email Not Exist',
+                          Text(value.errorMsg!,
                               style: TextStyle(
                                 color: Utils.white,
                                 fontFamily: "Mulish Regular",
@@ -155,7 +156,29 @@ class _LoginViewState extends State<LoginView> {
                         ],
                       ),
                     )
-                  : Text('');
+                  : value.successResponse == true
+                      ? Padding(
+                          padding: EdgeInsets.only(left: screenWidth * 0.050),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.check_box_outlined,
+                                color: Color.fromARGB(255, 73, 218, 78),
+                                size: screenHeight * 0.030,
+                              ),
+                              SizedBox(
+                                width: screenWidth * 0.020,
+                              ),
+                              Text(value.successMsg,
+                                  style: TextStyle(
+                                    color: Utils.white,
+                                    fontFamily: "Mulish Regular",
+                                    fontSize: screenHeight * 0.021,
+                                  ))
+                            ],
+                          ),
+                        )
+                      : Text('');
             }),
             Consumer<LoginViewModel>(builder: (context, value, child) {
               return Padding(
@@ -164,7 +187,9 @@ class _LoginViewState extends State<LoginView> {
                     right: screenWidth * 0.050,
                     top: value.failureResponse == true
                         ? screenHeight * 0.020
-                        : 0),
+                        : value.successResponse == true
+                            ? screenHeight * 0.020
+                            : 0),
                 child: InkWell(
                   onTap: () {
                     value.login(

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:music_app/Services/api.dart';
@@ -7,6 +9,8 @@ import 'package:music_app/http_model/http_model.dart';
 class SignUpViewModel with ChangeNotifier {
   bool isHide = true;
   String? errorMsg;
+  String successMsg = 'Successfuly SignUp';
+  bool successResponse = false;
   bool isSignUpLoading = false;
   bool failureResponse = false;
 
@@ -38,6 +42,8 @@ class SignUpViewModel with ChangeNotifier {
             await ApiService.signUp(body: body);
         if (response['status'] == 'Success') {
           isSignUpLoading = false;
+          bool successResponse = true;
+
           signUpEmailController.clear();
           signUpPasswordController.clear();
           signUpNameController.clear();

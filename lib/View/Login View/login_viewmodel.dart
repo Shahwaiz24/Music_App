@@ -6,6 +6,8 @@ import 'package:music_app/http_model/http_model.dart';
 class LoginViewModel with ChangeNotifier {
   bool isHide = true;
   bool isLoginLoading = false;
+  String successMsg = 'Successfuly Login';
+  bool successResponse = false;
   bool failureResponse = false;
   String? errorMsg;
 
@@ -31,6 +33,7 @@ class LoginViewModel with ChangeNotifier {
             await ApiService.login(body: body);
         if (response['status'] == 'Success') {
           isLoginLoading = false;
+          successResponse = true;
           loginEmailController.clear();
           loginPasswordController.clear();
           notifyListeners();

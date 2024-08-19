@@ -3,6 +3,7 @@ import 'package:music_app/Custom%20Widgets/app_logo_widget.dart';
 import 'package:music_app/Custom%20Widgets/button_container.dart';
 import 'package:music_app/Custom%20Widgets/text_field.dart';
 import 'package:music_app/Services/utils.dart';
+import 'package:music_app/View/Login%20View/login_view.dart';
 import 'package:music_app/View/Login%20View/login_viewmodel.dart';
 import 'package:music_app/View/Sign%20Up%20View/signup_viewmodel.dart';
 import 'package:music_app/http_model/http_model.dart';
@@ -43,6 +44,7 @@ class _SignupViewState extends State<SignupView> {
                       onTap: () {
                         signUpEmailController.clear();
                         signUpNameController.clear();
+                        model.failureResponse = false;
                         signUpPasswordController.clear();
                         Navigator.pop(context);
                       },
@@ -101,8 +103,6 @@ class _SignupViewState extends State<SignupView> {
                     top: screenWidth * 0.030),
                 child:
                     Consumer<SignUpViewModel>(builder: (context, value, child) {
-                  print("Hisdsdsd");
-
                   return TextFieldWigdet(
                       hint: "Email",
                       isSufix: false,
@@ -185,7 +185,29 @@ class _SignupViewState extends State<SignupView> {
                           ],
                         ),
                       )
-                    : Text('');
+                    : value.successResponse == true
+                        ? Padding(
+                            padding: EdgeInsets.only(left: screenWidth * 0.050),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.check_box_outlined,
+                                  color: Color.fromARGB(255, 73, 218, 78),
+                                  size: screenHeight * 0.030,
+                                ),
+                                SizedBox(
+                                  width: screenWidth * 0.020,
+                                ),
+                                Text(value.successMsg,
+                                    style: TextStyle(
+                                      color: Utils.white,
+                                      fontFamily: "Mulish Regular",
+                                      fontSize: screenHeight * 0.021,
+                                    ))
+                              ],
+                            ),
+                          )
+                        : Text('');
               }),
               Consumer<SignUpViewModel>(builder: (context, value, child) {
                 return Padding(
@@ -194,7 +216,9 @@ class _SignupViewState extends State<SignupView> {
                       right: screenWidth * 0.050,
                       top: value.failureResponse == true
                           ? screenHeight * 0.020
-                          : 0),
+                          : value.successResponse == true
+                              ? screenHeight * 0.020
+                              : 0),
                   child: InkWell(
                     onTap: () {
                       value.signup(
@@ -307,6 +331,10 @@ class _SignupViewState extends State<SignupView> {
                 child: InkWell(
                   onTap: () {
                     print("Navigating to Login");
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginView()));
                   },
                   child: Text.rich(
                     TextSpan(
