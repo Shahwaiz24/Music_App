@@ -37,4 +37,36 @@ class ApiService {
       // TODO
     }
   }
+  static signUp  ({
+    required UserSignUpModel body,
+  }) async {
+    try {
+      final url = "${mainUrl}signup";
+      final clientUrl = Uri.parse(url);
+      final bodyJson = jsonEncode(body.toJson());
+      var response = await http.post(
+        clientUrl,
+        body: bodyJson,
+        headers: {"Content-Type": "application/json"},
+      );
+
+        final responseData = json.decode(response.body);
+
+if(response.statusCode == 200){
+return {
+          "status": responseData["status"],
+          "user": responseData["user"][0],
+        };
+}
+else{
+  return {
+          "status": responseData["status"],
+          "error": responseData["response"],
+        };
+}
+
+    } catch (e) {
+      
+    }
+  }
 }

@@ -7,6 +7,7 @@ class LoginViewModel with ChangeNotifier {
   bool isHide = true;
   bool isLoginLoading = false;
   bool failureResponse = false;
+  String? errorMsg;
 
   enableHiding() {
     isHide = !isHide;
@@ -14,29 +15,44 @@ class LoginViewModel with ChangeNotifier {
   }
 
   login({required UserloginModel body}) async {
-    try {
-      isLoginLoading = true;
-      failureResponse = false;
+    isLoginLoading = true;
+    failureResponse = false;
+    notifyListeners();
+
+    if ((body.email == null || body.email.isEmpty) ||
+        (body.password == null || body.password.isEmpty)) {
+      isLoginLoading = false;
+      failureResponse = true;
+      errorMsg = 'Fill Given Fields';
       notifyListeners();
-      final Map<String, dynamic> response = await ApiService.login(body: body);
+    } else {
+      try {
+        final Map<String, dynamic> response =
+            await ApiService.login(body: body);
+        if (response['status'] == 'Success') {
+          isLoginLoading = false;
+          loginEmailController.clear();
+          loginPasswordController.clear();
+          notifyListeners();
+          print(
+              "Status: ${response['status']} | UserData: ${response['user']}");
+        } else {
+          isLoginLoading = false;
+          failureResponse = true;
 
-      if (response['status'] == 'Success') {
-        isLoginLoading = false;
-        loginEmailController.clear();
-        loginPasswordController.clear();
-        notifyListeners();
-        print("Status: ${response['status']} | UserData: ${response['user']}");
-      } else {
-        isLoginLoading = false;
+          loginEmailController.clear();
+          loginPasswordController.clear();
+          notifyListeners();
+          print(
+              "Status: ${response['status']} | UserData: ${response['error']}");
+        }
+      } on Exception catch (e) {
         failureResponse = true;
-
         loginEmailController.clear();
         loginPasswordController.clear();
+        errorMsg = "An Error Occured";
         notifyListeners();
-        print("Status: ${response['status']} | UserData: ${response['error']}");
       }
-    } on Exception catch (e) {
-      print("Login Erorr: ${e}");
     }
   }
 }

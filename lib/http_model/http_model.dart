@@ -18,4 +18,12 @@ class UserSignUpModel {
   final String password;
 
   UserSignUpModel({required this.email, required this.password, required this.fullname});
+  
+  Map<String, dynamic> toJson() {
+    return {
+      'fullname' : fullname,
+      'email': email,
+      'password': password,
+    };
+  }
 }

@@ -5,6 +5,7 @@ import 'package:music_app/Custom%20Widgets/text_field.dart';
 import 'package:music_app/Services/utils.dart';
 import 'package:music_app/View/Login%20View/login_viewmodel.dart';
 import 'package:music_app/View/Sign%20Up%20View/signup_viewmodel.dart';
+import 'package:music_app/http_model/http_model.dart';
 import 'package:provider/provider.dart';
 
 class SignupView extends StatefulWidget {
@@ -155,29 +156,77 @@ class _SignupViewState extends State<SignupView> {
                       ),
                       screenHeight: screenHeight,
                       editingController: signUpPasswordController,
-                      isObsecure: true);
+                      isObsecure: value.isHide);
                 }),
               ),
               SizedBox(
-                height: screenHeight * 0.030,
+                height: screenHeight * 0.020,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.050),
-                child: ButtonContainer(
-                  isSimple: false,
-                  screenHeight: screenHeight,
-                  screenWidth: screenWidth,
-                  child: Center(
-                    child: Text(
-                      "SignUp",
-                      style: TextStyle(
-                          color: Utils.white,
-                          fontFamily: "Mulish Bold",
-                          fontSize: screenHeight * 0.020),
+              Consumer<SignUpViewModel>(builder: (context, value, child) {
+                return value.failureResponse == true
+                    ? Padding(
+                        padding: EdgeInsets.only(left: screenWidth * 0.050),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.error_outline_rounded,
+                              color: Colors.red,
+                              size: screenHeight * 0.030,
+                            ),
+                            SizedBox(
+                              width: screenWidth * 0.020,
+                            ),
+                            Text(value.errorMsg!,
+                                style: TextStyle(
+                                  color: Utils.white,
+                                  fontFamily: "Mulish Regular",
+                                  fontSize: screenHeight * 0.021,
+                                ))
+                          ],
+                        ),
+                      )
+                    : Text('');
+              }),
+              Consumer<SignUpViewModel>(builder: (context, value, child) {
+                return Padding(
+                  padding: EdgeInsets.only(
+                      left: screenWidth * 0.050,
+                      right: screenWidth * 0.050,
+                      top: value.failureResponse == true
+                          ? screenHeight * 0.020
+                          : 0),
+                  child: InkWell(
+                    onTap: () {
+                      value.signup(
+                          body: UserSignUpModel(
+                              email: signUpEmailController.text,
+                              password: signUpPasswordController.text,
+                              fullname: signUpNameController.text));
+                    },
+                    child: ButtonContainer(
+                      isSimple: false,
+                      screenHeight: screenHeight,
+                      screenWidth: screenWidth,
+                      child: value.isSignUpLoading == true
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                color: Utils.white,
+                              ),
+                            )
+                          : Center(
+                              child: Text(
+                                "SignUp",
+                                style: TextStyle(
+                                    color: Utils.white,
+                                    fontFamily: "Mulish Bold",
+                                    fontSize: screenHeight * 0.020),
+                              ),
+                            ),
                     ),
                   ),
-                ),
-              ),
+                );
+              }),
+
               SizedBox(
                 height: screenHeight * 0.020,
               ),
