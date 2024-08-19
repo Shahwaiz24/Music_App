@@ -32,6 +32,8 @@ class LoginViewModel with ChangeNotifier {
       try {
         final Map<String, dynamic> response =
             await ApiService.login(body: body);
+
+
         if (response['status'] == 'Success') {
           isLoginLoading = false;
           failureResponse = false;
@@ -49,8 +51,7 @@ class LoginViewModel with ChangeNotifier {
           loginEmailController.clear();
           loginPasswordController.clear();
           notifyListeners();
-          print(
-              "Status: ${response['status']} | UserData: ${response['error']}");
+          print("Status: ${response['status']} | error: ${response['error']}");
         }
       } on Exception catch (e) {
         failureResponse = true;

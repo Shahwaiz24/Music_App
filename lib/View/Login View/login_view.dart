@@ -305,6 +305,11 @@ class _LoginViewState extends State<LoginView> {
               child: InkWell(
                 onTap: () {
                   print("Navigating to SignUp");
+                      loginEmailController.clear();
+                  loginPasswordController.clear();
+                  model.failureResponse = false;
+                  model.successResponse = false;
+                  model.isLoginLoading = false;
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => SignupView()));
                 },
