@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:music_app/Custom%20Widgets/app_logo_widget.dart';
 import 'package:music_app/Services/utils.dart';
+import 'package:music_app/View/Get%20In/getin_view.dart';
 import 'package:music_app/View/On%20Boarding/onboarding_view.dart';
 import 'package:music_app/View/Splash%20View/splash_viewmodel.dart';
 import 'package:provider/provider.dart';
@@ -18,9 +19,16 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () {
-      print("Next");
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const OnboardingView()));
+     Future<bool?> status = SplashViewmodel.getOnBoardingStatus();
+      if (status != null && status == true) {
+        print("Next Get In");
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const GetinView()));
+      } else {
+        print("Next On Boarding");
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const OnboardingView()));
+      }
     });
 
     super.initState();

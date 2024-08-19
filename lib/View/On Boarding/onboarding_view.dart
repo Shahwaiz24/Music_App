@@ -123,6 +123,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                         left: screenWidth * 0.070, right: screenWidth * 0.070),
                     child: InkWell(
                         onTap: () {
+                          model.onboardingSave();
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
