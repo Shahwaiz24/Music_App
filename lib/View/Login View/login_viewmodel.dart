@@ -33,6 +33,7 @@ class LoginViewModel with ChangeNotifier {
         final Map<String, dynamic> response =
             await ApiService.login(body: body);
 
+
         if (response['status'] == 'Success') {
           isLoginLoading = false;
           failureResponse = false;
@@ -54,11 +55,11 @@ class LoginViewModel with ChangeNotifier {
         }
       } on Exception catch (e) {
         failureResponse = true;
-        isLoginLoading = false;
+         isLoginLoading = false;
         successResponse = false;
         loginEmailController.clear();
         loginPasswordController.clear();
-        errorMsg = e.toString();
+        errorMsg = "An Error Occured";
         notifyListeners();
       }
     }

@@ -18,18 +18,7 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 3), () {
-      bool status = SplashViewmodel.getOnBoardingStatus();
-      if (status == true) {
-        print("Next Get In");
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const GetinView()));
-      } else {
-        print("Next On Boarding");
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const OnboardingView()));
-      }
-    });
+    SplashViewmodel.checkOnBoardingStatus(context: context);
 
     super.initState();
   }
