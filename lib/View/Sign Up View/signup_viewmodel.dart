@@ -34,6 +34,7 @@ class SignUpViewModel with ChangeNotifier {
         (body.fullname == null || body.fullname.isEmpty)) {
       isSignUpLoading = false;
       failureResponse = true;
+       successResponse = false;
       errorMsg = 'Fill Given Fields';
       notifyListeners();
     } else {
@@ -43,6 +44,7 @@ class SignUpViewModel with ChangeNotifier {
         if (response['status'] == 'Success') {
           isSignUpLoading = false;
           bool successResponse = true;
+          failureResponse = false;
 
           signUpEmailController.clear();
           signUpPasswordController.clear();
@@ -53,6 +55,7 @@ class SignUpViewModel with ChangeNotifier {
         } else {
           errorMsg = 'Email Already Exist';
           isSignUpLoading = false;
+           successResponse = false;
           failureResponse = true;
           signUpEmailController.clear();
           signUpPasswordController.clear();
@@ -65,6 +68,7 @@ class SignUpViewModel with ChangeNotifier {
         print("Error: ${e}");
         failureResponse = true;
         isSignUpLoading = false;
+         successResponse = false;
         signUpEmailController.clear();
         signUpPasswordController.clear();
         signUpNameController.clear();

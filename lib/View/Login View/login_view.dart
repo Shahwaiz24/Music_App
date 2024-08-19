@@ -42,6 +42,9 @@ class _LoginViewState extends State<LoginView> {
                       loginEmailController.clear();
                       loginPasswordController.clear();
                       model.failureResponse = false;
+                      model.successResponse = false;
+                      model.isLoginLoading = false;
+
                       Navigator.pop(context);
                     },
                     child: Icon(

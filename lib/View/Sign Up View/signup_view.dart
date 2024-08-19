@@ -46,6 +46,8 @@ class _SignupViewState extends State<SignupView> {
                         signUpNameController.clear();
                         model.failureResponse = false;
                         signUpPasswordController.clear();
+                        model.successResponse = false;
+                        model.isSignUpLoading = false;
                         Navigator.pop(context);
                       },
                       child: Icon(

@@ -25,6 +25,7 @@ class LoginViewModel with ChangeNotifier {
         (body.password == null || body.password.isEmpty)) {
       isLoginLoading = false;
       failureResponse = true;
+      successResponse = false;
       errorMsg = 'Fill Given Fields';
       notifyListeners();
     } else {
@@ -33,6 +34,7 @@ class LoginViewModel with ChangeNotifier {
             await ApiService.login(body: body);
         if (response['status'] == 'Success') {
           isLoginLoading = false;
+          failureResponse = false;
           successResponse = true;
           loginEmailController.clear();
           loginPasswordController.clear();
@@ -42,7 +44,8 @@ class LoginViewModel with ChangeNotifier {
         } else {
           isLoginLoading = false;
           failureResponse = true;
-
+          successResponse = false;
+          errorMsg = "Email Not Exist";
           loginEmailController.clear();
           loginPasswordController.clear();
           notifyListeners();
@@ -51,6 +54,7 @@ class LoginViewModel with ChangeNotifier {
         }
       } on Exception catch (e) {
         failureResponse = true;
+        successResponse = false;
         loginEmailController.clear();
         loginPasswordController.clear();
         errorMsg = "An Error Occured";
