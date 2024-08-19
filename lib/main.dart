@@ -16,15 +16,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: [
-      ChangeNotifierProvider(create: (_) => SplashViewmodel()),
-      ChangeNotifierProvider(create: (_) => OnboardingViewmodel()),
-      ChangeNotifierProvider(create: (_) => LoginViewModel()),
-      ChangeNotifierProvider(create: (_) => SignUpViewModel()),
-    ],
-    child: const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashView(),
-    ),);
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SplashViewmodel()),
+        ChangeNotifierProvider(create: (_) => OnboardingViewmodel()),
+        ChangeNotifierProvider(create: (_) => LoginViewModel()),
+        ChangeNotifierProvider(create: (_) => SignUpViewModel()),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashView(),
+      ),
+    );
   }
 }
