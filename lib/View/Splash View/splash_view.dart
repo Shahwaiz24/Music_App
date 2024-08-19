@@ -19,8 +19,8 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () {
-     Future<bool?> status = SplashViewmodel.getOnBoardingStatus();
-      if (status != null && status == true) {
+      bool status = SplashViewmodel.getOnBoardingStatus();
+      if (status == true) {
         print("Next Get In");
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const GetinView()));

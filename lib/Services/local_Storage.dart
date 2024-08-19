@@ -8,10 +8,16 @@ class LocalStorage {
     print('Initialized');
   }
 
-  static onBoarding() async {
-   await prefs.setBool('onBoarding Save', true);
+  static onBoardingSave() async {
+    await prefs.setBool('onBoardingSave', true);
   }
-    static bool? getOnBoardingStatus() {
-    return prefs.getBool('onBoardingSave');
+
+  static getOnBoardingStatus() async {
+    bool? status = await prefs.getBool('onBoardingSave');
+    if (status == true) {
+      return status;
+    } else {
+      return false;
+    }
   }
 }
