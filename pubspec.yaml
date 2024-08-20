@@ -65,6 +65,7 @@ flutter:
   assets:
     - assets/image/facebook.png
     - assets/image/google.png
+    - assets/image/stats.png
     - assets/image/person.png
     - assets/image/img_girl.png
     - assets/image/musium.png

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/Services/api.dart';
 import 'package:music_app/Services/local_Storage.dart';
+import 'package:music_app/Services/user_data.dart';
 import 'package:music_app/View/Home%20View/home_view.dart';
 import 'package:music_app/View/Login%20View/login_view.dart';
 import 'package:music_app/http_model/http_model.dart';
@@ -40,7 +41,7 @@ class LoginViewModel with ChangeNotifier {
             await ApiService.login(body: body);
 
         if (response['status'] == 'Success') {
-          isLoginLoading = false;
+        await  LocalStorage.saveUserData(data: response['user']);
           failureResponse = false;
           successResponse = true;
           await loginSave();
@@ -49,6 +50,8 @@ class LoginViewModel with ChangeNotifier {
           notifyListeners();
           print(
               "Status: ${response['status']} | UserData: ${response['user']}");
+          isLoginLoading = false;
+          notifyListeners();
           await Future.delayed(const Duration(milliseconds: 1000));
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const HomeView()));
