@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/Services/local_Storage.dart';
+import 'package:music_app/View/Home%20View/home_viewmodel.dart';
 import 'package:music_app/View/Login%20View/login_viewmodel.dart';
-import 'package:music_app/View/On%20Boarding/onboarding_viewmodel.dart';
+import 'package:music_app/View/On%20Boarding%20View/onboarding_viewmodel.dart';
 import 'package:music_app/View/Sign%20Up%20View/signup_viewmodel.dart';
 import 'package:music_app/View/Splash%20View/splash_view.dart';
 import 'package:music_app/View/Splash%20View/splash_viewmodel.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => OnboardingViewmodel()),
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
         ChangeNotifierProvider(create: (_) => SignUpViewModel()),
+        ChangeNotifierProvider(create: (_) => HomeViewmodel()),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

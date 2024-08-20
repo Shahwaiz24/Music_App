@@ -9,7 +9,7 @@ import 'package:music_app/http_model/http_model.dart';
 class SignUpViewModel with ChangeNotifier {
   bool isHide = true;
   String? errorMsg;
-  String successMsg = 'Successfuly SignUp';
+  String successMsg = 'Successfuly SignUp Please Login to continue';
   bool successResponse = false;
   bool isSignUpLoading = false;
   bool failureResponse = false;

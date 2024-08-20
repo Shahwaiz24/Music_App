@@ -196,6 +196,7 @@ class _LoginViewState extends State<LoginView> {
                 child: InkWell(
                   onTap: () {
                     value.login(
+                      context: context,
                         body: UserloginModel(
                             email: loginEmailController.text,
                             password: loginPasswordController.text));

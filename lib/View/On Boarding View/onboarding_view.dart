@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/Custom%20Widgets/button_container.dart';
 import 'package:music_app/Services/utils.dart';
-import 'package:music_app/View/Get%20In/getin_view.dart';
-import 'package:music_app/View/On%20Boarding/onboarding_viewmodel.dart';
+import 'package:music_app/View/Get%20In%20View/getin_view.dart';
+import 'package:music_app/View/On%20Boarding%20View/onboarding_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class OnboardingView extends StatefulWidget {
