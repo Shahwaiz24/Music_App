@@ -1,10 +1,9 @@
-import 'dart:async';
+
+// ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:music_app/Custom%20Widgets/app_logo_widget.dart';
 import 'package:music_app/Services/utils.dart';
-import 'package:music_app/View/Get%20In/getin_view.dart';
-import 'package:music_app/View/On%20Boarding/onboarding_view.dart';
 import 'package:music_app/View/Splash%20View/splash_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +24,7 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    final splash_model = Provider.of<SplashViewmodel>(context);
+    final splashModel = Provider.of<SplashViewmodel>(context);
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
