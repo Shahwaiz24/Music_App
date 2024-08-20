@@ -7,4 +7,10 @@ class Utils {
   static Color black = Color(0xff121111);
   static Color blueText = Color(0xff7CEEFF);
   static Color roundBlue = Color(0xff06A0B5);
+  static LinearGradient primaryGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [Color(0xff0E0E0E), Color(0xff102B2D), Utils.blackPrimary],
+    stops: const [0.0, 0.35, 1.0],
+  );
 }

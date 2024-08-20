@@ -21,7 +21,6 @@ TextEditingController loginPasswordController = TextEditingController();
 class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
-    print("Hi");
     final model = Provider.of<LoginViewModel>(context, listen: false);
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
