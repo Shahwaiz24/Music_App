@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/Custom%20Widgets/bottom_bar.dart';
+import 'package:music_app/Custom%20Widgets/button_container.dart';
 import 'package:music_app/Services/user_data.dart';
 import 'package:music_app/Services/utils.dart';
 import 'package:music_app/View/Home%20View/home_viewmodel.dart';
@@ -26,6 +28,16 @@ class _HomeViewState extends State<HomeView> {
     final screenWidth = MediaQuery.of(context).size.width;
     model.getStats();
     return Scaffold(
+      bottomNavigationBar:
+          Consumer<HomeViewmodel>(builder: (context, value, child) {
+        return BottomBar(
+          listener: value.notifyListener(),
+          // ontap: value.ontap(index: value.selectedIndex),
+          // selectedIndex: value.selectedIndex,
+          screenHeight: screenHeight,
+          screenWidth: screenWidth,
+        );
+      }),
       backgroundColor: Utils.blackPrimary,
       body: Stack(
         children: [
@@ -126,6 +138,32 @@ class _HomeViewState extends State<HomeView> {
                                   fontFamily: 'Mulish Regular',
                                   fontSize: screenHeight * 0.020),
                             ),
+                            SizedBox(
+                              height: screenHeight * 0.020,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: screenWidth * 0.180),
+                              child: InkWell(
+                                onTap: () {
+                                  print('Navigate to Explore');
+                                },
+                                child: ButtonContainer(
+                                  isSimple: true,
+                                  screenHeight: screenHeight,
+                                  screenWidth: screenWidth,
+                                  child: Center(
+                                    child: Text(
+                                      'Explore',
+                                      style: TextStyle(
+                                          color: Utils.white,
+                                          fontFamily: 'Mulish Regular',
+                                          fontSize: screenHeight * 0.018),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
                           ],
                         )
                       : Column(),

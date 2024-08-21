@@ -4,8 +4,13 @@ import 'package:music_app/Services/user_data.dart';
 
 class HomeViewmodel with ChangeNotifier {
   bool isExplore = false;
+  int selectedIndex = 0;
   static getUserdata() async {
     await LocalStorage.getUserData();
+  }
+
+  notifyListener() {
+    notifyListeners();
   }
 
   getStats() async {
