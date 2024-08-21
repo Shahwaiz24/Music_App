@@ -4,7 +4,6 @@ import 'package:music_app/Custom%20Widgets/button_container.dart';
 import 'package:music_app/Custom%20Widgets/text_field.dart';
 import 'package:music_app/Services/utils.dart';
 import 'package:music_app/View/Login%20View/login_view.dart';
-import 'package:music_app/View/Login%20View/login_viewmodel.dart';
 import 'package:music_app/View/Sign%20Up%20View/signup_viewmodel.dart';
 import 'package:music_app/http_model/http_model.dart';
 import 'package:provider/provider.dart';
