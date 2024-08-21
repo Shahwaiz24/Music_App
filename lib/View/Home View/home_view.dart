@@ -29,15 +29,11 @@ class _HomeViewState extends State<HomeView> {
     model.getStats();
     return Scaffold(
       bottomNavigationBar:
-          Consumer<HomeViewmodel>(builder: (context, value, child) {
-        return BottomBar(
-          listener: value.notifyListener(),
-          // ontap: value.ontap(index: value.selectedIndex),
-          // selectedIndex: value.selectedIndex,
-          screenHeight: screenHeight,
-          screenWidth: screenWidth,
-        );
-      }),
+          BottomBar(
+            // listener: value.notifyListener(),
+            screenHeight: screenHeight,
+            screenWidth: screenWidth,
+          ),
       backgroundColor: Utils.blackPrimary,
       body: Stack(
         children: [
