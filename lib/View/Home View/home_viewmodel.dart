@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:music_app/Services/local_Storage.dart';
 import 'package:music_app/Services/user_data.dart';
 import 'package:music_app/View/Home%20View/home_view.dart';
@@ -49,7 +48,7 @@ class HomeViewmodel with ChangeNotifier {
         (UserData.userdata['stats']['Top_Mixes'] == 0) &&
         (UserData.userdata['stats']['Based On Recent Listening'] == 0)) {
       print('Have to Explore');
-      isExplore = true;
+      // isExplore = true;
     }
   }
 }

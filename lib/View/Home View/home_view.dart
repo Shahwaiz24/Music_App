@@ -17,7 +17,6 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     HomeViewmodel.getUserdata();
-
     super.initState();
   }
 
@@ -27,147 +26,168 @@ class _HomeViewState extends State<HomeView> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     model.getStats();
+
     return Scaffold(
-      bottomNavigationBar:
-          BottomBar(
-            // listener: value.notifyListener(),
-            screenHeight: screenHeight,
-            screenWidth: screenWidth,
-          ),
+      bottomNavigationBar: BottomBar(
+        screenHeight: screenHeight,
+        screenWidth: screenWidth,
+      ),
       backgroundColor: Utils.blackPrimary,
-      body: Stack(
-        children: [
-          Container(
-            alignment: Alignment.topCenter,
-            height: screenHeight * 0.300,
-            decoration: BoxDecoration(gradient: Utils.primaryGradient),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: screenHeight * 0.080),
-            child: Column(
-              children: [
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: screenWidth * 0.040),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: screenHeight * 0.100,
-                        width: screenWidth * 0.120,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                color: Utils.bluePrimary,
-                                width: screenWidth * 0.005)),
-                        child: const Image(
-                            image: AssetImage('assets/image/person.png')),
+      body: Container(
+        // alignment: Alignment.topCenter,
+        height: screenHeight * 0.300,
+        decoration: BoxDecoration(gradient: Utils.primaryGradient),
+        child: Padding(
+          padding: EdgeInsets.only(top: screenHeight * 0.080),
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.start
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.040),
+                child: Row(
+                  children: [
+                    Container(
+                      height: screenHeight * 0.100,
+                      width: screenWidth * 0.120,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: Utils.bluePrimary,
+                              width: screenWidth * 0.005)),
+                      child: const Image(
+                          image: AssetImage('assets/image/person.png')),
+                    ),
+                    SizedBox(
+                      width: screenWidth * 0.040,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: screenHeight * 0.015),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Welcome back !',
+                            style: TextStyle(
+                                color: Utils.white,
+                                fontSize: screenHeight * 0.022,
+                                fontFamily: 'Century Gothic Bold'),
+                          ),
+                          SizedBox(
+                            height: screenHeight * 0.001,
+                          ),
+                          Text(
+                            UserData.userdata['fullname'],
+                            style: TextStyle(
+                                color: Utils.white.withOpacity(0.6),
+                                fontSize: screenHeight * 0.019,
+                                fontFamily: 'Century Gothic Bold'),
+                          )
+                        ],
                       ),
-                      SizedBox(
-                        width: screenWidth * 0.040,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: screenHeight * 0.015),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Welcome back !',
-                              style: TextStyle(
-                                  color: Utils.white,
-                                  fontSize: screenHeight * 0.022,
-                                  fontFamily: 'Century Gothic Bold'),
-                            ),
-                            SizedBox(
-                              height: screenHeight * 0.001,
-                            ),
-                            Text(
-                              UserData.userdata['fullname'],
-                              style: TextStyle(
-                                  color: Utils.white.withOpacity(0.6),
-                                  fontSize: screenHeight * 0.019,
-                                  fontFamily: 'Century Gothic Bold'),
-                            )
-                          ],
-                        ),
-                      ),
-                      const Spacer(),
-                      InkWell(
-                          onTap: () {
-                            print('Stats');
-                          },
-                          child: Icon(
-                            Icons.trending_up_outlined,
-                            color: Utils.white,
-                            size: screenHeight * 0.032,
-                          )),
-                      SizedBox(
-                        width: screenWidth * 0.030,
-                      ),
-                      Icon(
-                        Icons.notifications_none_outlined,
-                        color: Utils.white,
-                        size: screenHeight * 0.032,
-                      ),
-                      SizedBox(
-                        width: screenWidth * 0.030,
-                      ),
-                      Icon(
-                        Icons.settings_outlined,
-                        color: Utils.white,
-                        size: screenHeight * 0.032,
-                      ),
-                      SizedBox(
-                        width: screenWidth * 0.010,
-                      ),
-                    ],
-                  ),
+                    ),
+                    const Spacer(),
+                    InkWell(
+                        onTap: () {
+                          print('Stats');
+                        },
+                        child: Icon(
+                          Icons.trending_up_outlined,
+                          color: Utils.white,
+                          size: screenHeight * 0.032,
+                        )),
+                    SizedBox(
+                      width: screenWidth * 0.030,
+                    ),
+                    Icon(
+                      Icons.notifications_none_outlined,
+                      color: Utils.white,
+                      size: screenHeight * 0.032,
+                    ),
+                    SizedBox(
+                      width: screenWidth * 0.030,
+                    ),
+                    Icon(
+                      Icons.settings_outlined,
+                      color: Utils.white,
+                      size: screenHeight * 0.032,
+                    ),
+                    SizedBox(
+                      width: screenWidth * 0.010,
+                    ),
+                  ],
                 ),
-                Expanded(
-                  child: model.isExplore == true
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'You Have to Explore First',
-                              style: TextStyle(
-                                  color: Utils.white,
-                                  fontFamily: 'Mulish Regular',
-                                  fontSize: screenHeight * 0.020),
-                            ),
-                            SizedBox(
-                              height: screenHeight * 0.020,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: screenWidth * 0.180),
-                              child: InkWell(
-                                onTap: () {
-                                  print('Navigate to Explore');
-                                },
-                                child: ButtonContainer(
-                                  isSimple: true,
-                                  screenHeight: screenHeight,
-                                  screenWidth: screenWidth,
-                                  child: Center(
-                                    child: Text(
-                                      'Explore',
-                                      style: TextStyle(
-                                          color: Utils.white,
-                                          fontFamily: 'Mulish Regular',
-                                          fontSize: screenHeight * 0.018),
-                                    ),
+              ),
+              model.isExplore == true
+                  ? Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'You Have to Explore First',
+                            style: TextStyle(
+                                color: Utils.white,
+                                fontFamily: 'Mulish Regular',
+                                fontSize: screenHeight * 0.020),
+                          ),
+                          SizedBox(
+                            height: screenHeight * 0.020,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth * 0.180),
+                            child: InkWell(
+                              onTap: () {
+                                print('Navigate to Explore');
+                              },
+                              child: ButtonContainer(
+                                isSimple: true,
+                                screenHeight: screenHeight,
+                                screenWidth: screenWidth,
+                                child: Center(
+                                  child: Text(
+                                    'Explore',
+                                    style: TextStyle(
+                                        color: Utils.white,
+                                        fontFamily: 'Mulish Regular',
+                                        fontSize: screenHeight * 0.018),
                                   ),
                                 ),
                               ),
-                            )
-                          ],
-                        )
-                      : Column(),
-                )
-              ],
-            ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  : Expanded(
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: screenHeight * 0.020),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.only(left: screenWidth * 0.050),
+                              child: Column(
+                                // crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Continue Listening',
+                                    style: TextStyle(
+                                        color: Utils.white,
+                                        fontFamily: 'Century Gothic Bold',
+                                        fontSize: screenHeight * 0.025),
+                                  ),
+                                  // Add more widgets here
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
