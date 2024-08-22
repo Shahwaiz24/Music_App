@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/Custom%20Widgets/bottom_bar.dart';
 import 'package:music_app/Custom%20Widgets/button_container.dart';
+import 'package:music_app/Custom%20Widgets/grid_view.dart';
 import 'package:music_app/Services/user_data.dart';
 import 'package:music_app/Services/utils.dart';
 import 'package:music_app/View/Home%20View/home_viewmodel.dart';
@@ -34,13 +35,11 @@ class _HomeViewState extends State<HomeView> {
       ),
       backgroundColor: Utils.blackPrimary,
       body: Container(
-        // alignment: Alignment.topCenter,
         height: screenHeight * 0.300,
         decoration: BoxDecoration(gradient: Utils.primaryGradient),
         child: Padding(
           padding: EdgeInsets.only(top: screenHeight * 0.080),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.start
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.040),
@@ -158,28 +157,32 @@ class _HomeViewState extends State<HomeView> {
                         ],
                       ),
                     )
-                  : Expanded(
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: screenHeight * 0.020),
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Padding(
-                              padding:
-                                  EdgeInsets.only(left: screenWidth * 0.050),
-                              child: Column(
-                                // crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Continue Listening',
-                                    style: TextStyle(
-                                        color: Utils.white,
-                                        fontFamily: 'Century Gothic Bold',
-                                        fontSize: screenHeight * 0.025),
-                                  ),
-                                  // Add more widgets here
-                                ],
-                              ),
+                  : Flexible(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: screenHeight * 0.020),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: screenWidth * 0.050),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Continue Listening',
+                                  style: TextStyle(
+                                      color: Utils.white,
+                                      fontFamily: 'Century Gothic Bold',
+                                      fontSize: screenHeight * 0.025),
+                                ),
+                                SizedBox(
+                                  height: screenHeight * 0.030,
+                                ),
+                                Expanded(
+                                  child: GridViewWidget(
+                                      screenHeight: screenHeight,
+                                      screenWidth: screenWidth),
+                                ),
+                              ],
                             ),
                           ),
                         ),
