@@ -13,20 +13,25 @@ class _GridViewWidgetState extends State<GridViewWidget> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount: 6, // Total 6 items
+      itemCount: 4,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      // Total 6 items
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-      ),
+          crossAxisCount: 2,
+          crossAxisSpacing: widget.screenWidth * 0.035,
+          mainAxisSpacing: widget.screenHeight * 0.015,
+          mainAxisExtent: widget.screenHeight * 0.070),
       itemBuilder: (context, index) {
         return Container(
-          height: widget.screenHeight * 0.120,
-          width: widget.screenWidth * 0.050,
+          // height: 100,
+          // width: widget.screenWidth * 0.050,
           color: Colors.red, // Container background color
-          child: Text(
-            'Item $index',
-            style: TextStyle(color: Colors.white, fontSize: 20),
+          child: Center(
+            child: Text(
+              'Item $index',
+              style: const TextStyle(color: Colors.white, fontSize: 20),
+            ),
           ),
         );
       },
