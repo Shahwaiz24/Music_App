@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/Services/utils.dart';
 
 class GridViewWidget extends StatefulWidget {
   const GridViewWidget(
@@ -15,7 +16,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
     return GridView.builder(
       itemCount: 4,
       padding: EdgeInsets.zero,
-      
+
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       // Total 6 items
@@ -23,19 +24,40 @@ class _GridViewWidgetState extends State<GridViewWidget> {
           crossAxisCount: 2,
           crossAxisSpacing: widget.screenWidth * 0.035,
           mainAxisSpacing: widget.screenHeight * 0.015,
-          mainAxisExtent: widget.screenHeight * 0.070),
+          mainAxisExtent: widget.screenHeight * 0.085),
       itemBuilder: (context, index) {
         return Container(
-          // height: 100,
-          // width: widget.screenWidth * 0.050,
-          color: Colors.red, // Container background color
-          child: Center(
-            child: Text(
-              'Item $index',
-              style: const TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          ),
-        );
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(
+                      widget.screenWidth * 0.035,
+                    ),
+                    bottomRight: Radius.circular(
+                      widget.screenWidth * 0.035,
+                    )),
+                gradient: LinearGradient(
+                    colors: [
+                      Utils.gridColorOne.withOpacity(0.1),
+                      Utils.gridColorTwo.withOpacity(0.2)
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight)), // Container background color
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  'Image${index}',
+                  style: TextStyle(color: Utils.white),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: widget.screenWidth * 0.030),
+                  child: Text(
+                    'Track Name',
+                    style: TextStyle(color: Utils.white),
+                  ),
+                )
+              ],
+            ));
       },
     );
   }

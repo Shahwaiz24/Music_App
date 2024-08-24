@@ -191,6 +191,30 @@ class _HomeViewState extends State<HomeView> {
                                 screenWidth: screenWidth,
                               ),
                             ),
+                            SizedBox(
+                              height: screenHeight * 0.030,
+                            ),
+                            Text(
+                              'Your Top Mixes',
+                              style: TextStyle(
+                                  color: Utils.white,
+                                  fontFamily: 'Century Gothic Bold',
+                                  fontSize: screenHeight * 0.025),
+                            )
+                            // CarouselView(itemExtent: 2, children: [
+                            //   Container(
+                            //     height: screenHeight * 0.040,
+                            //     color: Utils.white,
+                            //     margin:
+                            //         EdgeInsets.only(left: screenWidth * 0.030),
+                            //   ),
+                            //   Container(
+                            //     height: screenHeight * 0.040,
+                            //     color: Utils.white,
+                            //     margin:
+                            //         EdgeInsets.only(left: screenWidth * 0.030),
+                            //   )
+                            // ])
                           ],
                         ),
                       ),
