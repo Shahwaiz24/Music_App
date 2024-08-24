@@ -14,6 +14,8 @@ class _GridViewWidgetState extends State<GridViewWidget> {
   Widget build(BuildContext context) {
     return GridView.builder(
       itemCount: 4,
+      padding: EdgeInsets.zero,
+      
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       // Total 6 items
