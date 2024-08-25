@@ -82,6 +82,7 @@ class _SignupViewState extends State<SignupView> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.050),
                 child: TextFieldWigdet(
+                     isSearch: false,
                     hint: "Full Name",
                     fontFamily: "Century Gothic",
                     isSufix: false,
@@ -105,6 +106,7 @@ class _SignupViewState extends State<SignupView> {
                 child:
                     Consumer<SignUpViewModel>(builder: (context, value, child) {
                   return TextFieldWigdet(
+                       isSearch: false,
                       hint: "Email",
                       isSufix: false,
                       suffixIcon: Text(""),
@@ -131,6 +133,7 @@ class _SignupViewState extends State<SignupView> {
                   print("Hisdsdsd");
 
                   return TextFieldWigdet(
+                       isSearch: false,
                       hint: "Password",
                       isSufix: true,
                       suffixIcon: InkWell(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/Services/local_Storage.dart';
 import 'package:music_app/Services/user_data.dart';
+import 'package:music_app/View/Explore%20View/explore_view.dart';
 import 'package:music_app/View/Home%20View/home_view.dart';
 
 class HomeViewmodel with ChangeNotifier {
@@ -28,7 +29,7 @@ class HomeViewmodel with ChangeNotifier {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const HomeView()),
+          MaterialPageRoute(builder: (context) => const ExploreView()),
         );
         print('Case 2');
 

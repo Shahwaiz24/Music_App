@@ -79,6 +79,7 @@ class _LoginViewState extends State<LoginView> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.050),
               child: TextFieldWigdet(
+                  isSearch: false,
                   hint: "Email",
                   fontFamily: "Century Gothic",
                   isSufix: false,
@@ -103,6 +104,7 @@ class _LoginViewState extends State<LoginView> {
                 print("Hisdsdsd");
 
                 return TextFieldWigdet(
+                    isSearch: false,
                     hint: "Password",
                     isSufix: true,
                     suffixIcon: InkWell(
@@ -195,7 +197,7 @@ class _LoginViewState extends State<LoginView> {
                 child: InkWell(
                   onTap: () {
                     value.login(
-                      context: context,
+                        context: context,
                         body: UserloginModel(
                             email: loginEmailController.text,
                             password: loginPasswordController.text));
@@ -305,7 +307,7 @@ class _LoginViewState extends State<LoginView> {
               child: InkWell(
                 onTap: () {
                   print("Navigating to SignUp");
-                      loginEmailController.clear();
+                  loginEmailController.clear();
                   loginPasswordController.clear();
                   model.failureResponse = false;
                   model.successResponse = false;

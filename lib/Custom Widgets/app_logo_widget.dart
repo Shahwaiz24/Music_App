@@ -19,7 +19,7 @@ class _AppLogoWidgetState extends State<AppLogoWidget> {
   @override
   Widget build(BuildContext context) {
     return Image(
-      image: AssetImage(
+      image: const AssetImage(
         "assets/image/logo.png",
       ),
       height: widget.screenHeight * widget.imageHeight,

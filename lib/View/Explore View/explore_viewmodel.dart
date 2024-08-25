@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-class ExploreViewModel with ChangeNotifier{}
+class ExploreViewModel with ChangeNotifier {}

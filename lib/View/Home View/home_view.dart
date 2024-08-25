@@ -124,6 +124,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
             ),
+         
             model.isExplore == true
                 ? Expanded(
                     child: Column(
