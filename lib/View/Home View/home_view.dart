@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/Custom%20Widgets/bottom_bar.dart';
 import 'package:music_app/Custom%20Widgets/button_container.dart';
+import 'package:music_app/Custom%20Widgets/carousel_widget.dart';
 import 'package:music_app/Custom%20Widgets/grid_view.dart';
 import 'package:music_app/Services/user_data.dart';
 import 'package:music_app/Services/utils.dart';
@@ -200,21 +201,25 @@ class _HomeViewState extends State<HomeView> {
                                   color: Utils.white,
                                   fontFamily: 'Century Gothic Bold',
                                   fontSize: screenHeight * 0.025),
-                            )
-                            // CarouselView(itemExtent: 2, children: [
-                            //   Container(
-                            //     height: screenHeight * 0.040,
-                            //     color: Utils.white,
-                            //     margin:
-                            //         EdgeInsets.only(left: screenWidth * 0.030),
-                            //   ),
-                            //   Container(
-                            //     height: screenHeight * 0.040,
-                            //     color: Utils.white,
-                            //     margin:
-                            //         EdgeInsets.only(left: screenWidth * 0.030),
-                            //   )
-                            // ])
+                            ),
+                            CarouselWidget(
+                                isMixes: true,
+                                screenHeight: screenHeight,
+                                screenWidth: screenWidth),
+                            SizedBox(
+                              height: screenHeight * 0.030,
+                            ),
+                            Text(
+                              'Based on your recent listening',
+                              style: TextStyle(
+                                  color: Utils.white,
+                                  fontFamily: 'Century Gothic Bold',
+                                  fontSize: screenHeight * 0.025),
+                            ),
+                            CarouselWidget(
+                                screenHeight: screenHeight,
+                                screenWidth: screenWidth,
+                                isMixes: false),
                           ],
                         ),
                       ),

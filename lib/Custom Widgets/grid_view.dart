@@ -14,7 +14,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount: 4,
+      itemCount: 6,
       padding: EdgeInsets.zero,
 
       shrinkWrap: true,
@@ -24,7 +24,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
           crossAxisCount: 2,
           crossAxisSpacing: widget.screenWidth * 0.035,
           mainAxisSpacing: widget.screenHeight * 0.015,
-          mainAxisExtent: widget.screenHeight * 0.085),
+          mainAxisExtent: widget.screenHeight * 0.070),
       itemBuilder: (context, index) {
         return Container(
             decoration: BoxDecoration(
