@@ -7,6 +7,7 @@ class Utils {
   static Color white = Color(0xffFFFFFF);
   static Color black = Color(0xff121111);
   static Color blueText = Color(0xff7CEEFF);
+  static Color searchHint = Color(0xff8A9A9D);
   static Color roundBlue = Color(0xff06A0B5);
   static Color gridColorOne = Color(0xff436369);
   static Color gridColorTwo = Color(0xff84C3CF);

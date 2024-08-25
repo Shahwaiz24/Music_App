@@ -189,6 +189,7 @@ class _HomeViewState extends State<HomeView> {
                               padding: EdgeInsets.only(
                                   top: 0, right: screenHeight * 0.020),
                               child: GridViewWidget(
+                                isArtistGrid: false,
                                 screenHeight: screenHeight,
                                 screenWidth: screenWidth,
                               ),
