@@ -19,6 +19,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
   Widget build(BuildContext context) {
     return widget.isArtistGrid == true
         ? GridView.builder(
+          
             itemCount: 6,
             padding: EdgeInsets.only(top: widget.screenHeight * 0.020),
             shrinkWrap: true,
@@ -27,20 +28,48 @@ class _GridViewWidgetState extends State<GridViewWidget> {
                 crossAxisCount: 2,
                 crossAxisSpacing: widget.screenWidth * 0.080,
                 mainAxisSpacing: widget.screenHeight * 0.020,
-                mainAxisExtent: widget.screenHeight * 0.070),
+                mainAxisExtent:
+                    widget.screenHeight * 0.230), // Increased height
             itemBuilder: (context, index) {
-              return Container(
-                color: Utils.white,
-                child: Text('Index ${index}'),
+              
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width:
+                        widget.screenWidth * 0.3, // Adjust the size as needed
+                    height:
+                        widget.screenWidth * 0.3, // Adjust the size as needed
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        alignment: Alignment.center,
+                        image: AssetImage('assets/image/yunus.png'),
+                        fit: BoxFit.cover, // Cover the container with the image
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                      height: widget.screenHeight *
+                          0.010), // Space between image and text
+                  Text(
+                    'Artist Name', // Replace with your artist name
+                    style: TextStyle(
+                      fontFamily: 'Century Gothic Bold',
+
+                      color: Utils.white,
+                      fontSize: widget.screenHeight *
+                          0.020, // Adjust font size as needed
+                    ),
+                  ),
+                ],
               );
             })
         : GridView.builder(
             itemCount: 6,
             padding: EdgeInsets.zero,
-
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            // Total 6 items
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: widget.screenWidth * 0.035,
