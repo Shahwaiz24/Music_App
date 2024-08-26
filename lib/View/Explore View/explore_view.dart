@@ -19,16 +19,6 @@ TextEditingController searchController = TextEditingController();
 
 class _ExploreViewState extends State<ExploreView> {
   @override
-  void initState() {
-    super.initState();
-
-    // Accessing ExploreViewModel instance and calling fetchingArtist in initState
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<ExploreViewModel>(context, listen: false).fetchingArtist();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final model = Provider.of<ExploreViewModel>(context, listen: false);
     final screenHeight = MediaQuery.of(context).size.height;
@@ -38,133 +28,147 @@ class _ExploreViewState extends State<ExploreView> {
       backgroundColor: Utils.blackPrimary,
       bottomNavigationBar:
           BottomBar(screenHeight: screenHeight, screenWidth: screenWidth),
-      body: model.isLoading == true
-          ? const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: CircularProgressIndicator(),
-                )
-              ],
-            )
-          : model.isError == true
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.error_outline_rounded,
-                          color: Colors.red,
-                          size: screenHeight * 0.030,
+      body: FutureBuilder(
+        future: model.fetchingArtist(),
+        builder: (context, snapshot) {
+          if (model.isLoading == true) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: Utils.bluePrimary,
+              ),
+            );
+          } else if (model.isError == true) {
+            return Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.error_outline_rounded,
+                        color: Colors.red,
+                        size: screenHeight * 0.030,
+                      ),
+                      SizedBox(width: screenWidth * 0.020),
+                      Text(
+                        'An Error Occurred',
+                        style: TextStyle(
+                          color: Utils.white,
+                          fontSize: screenHeight * 0.020,
+                          fontFamily: 'Mulish Regular',
                         ),
-                        SizedBox(
-                          width: screenWidth * 0.020,
-                        ),
-                        Text(
-                          'An Error Occured',
-                          style: TextStyle(
-                              color: Utils.white,
-                              fontSize: screenHeight * 0.020,
-                              fontFamily: 'Mulish Regular'),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: screenHeight * 0.020,
-                    ),
-                    ButtonContainer(
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: screenHeight * 0.020),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: screenWidth * 0.150),
+                    child: InkWell(
+                      onTap: () async {
+                        await model.refreshToken();
+                      },
+                      child: ButtonContainer(
                         isSimple: true,
+                        screenHeight: screenHeight,
+                        screenWidth: screenWidth,
                         child: Center(
                           child: Text(
                             'Refresh',
                             style: TextStyle(
-                                fontFamily: 'Century Gothic Bold',
-                                fontSize: screenHeight * 0.018,
-                                color: Utils.white),
+                              fontFamily: 'Century Gothic Bold',
+                              fontSize: screenHeight * 0.022,
+                              color: Utils.white,
+                            ),
                           ),
                         ),
-                        screenHeight: screenHeight,
-                        screenWidth: screenWidth)
-                  ],
-                )
-              : SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration:
-                            BoxDecoration(gradient: Utils.primaryGradient),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: screenHeight * 0.080),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: screenWidth * 0.020),
-                                child: Row(
-                                  children: [
-                                    AppLogoWidget(
-                                        screenHeight: screenHeight,
-                                        screenWidth: screenWidth,
-                                        imageWidth: 0.080,
-                                        imageHeight: 0.080),
-                                    Text(
-                                      'Search',
-                                      style: TextStyle(
-                                          color: Utils.searchText,
-                                          fontSize: screenHeight * 0.030,
-                                          fontFamily: 'Century Gothic Bold'),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: screenHeight * 0.020,
-                              ),
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                    left: screenWidth * 0.050,
-                                    right: screenWidth * 0.050,
-                                  ),
-                                  child: SearchBarWidget(
-                                    onchanged: () {
-                                      print('sdsds');
-                                    },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(gradient: Utils.primaryGradient),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          top: screenHeight * 0.060,
+                          bottom: screenHeight * 0.020),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth * 0.030),
+                            child: Row(
+                              children: [
+                                AppLogoWidget(
                                     screenHeight: screenHeight,
                                     screenWidth: screenWidth,
-                                    editingController: searchController,
-                                  ))
-                            ],
+                                    imageWidth: 0.080,
+                                    imageHeight: 0.080),
+                                SizedBox(width: screenWidth * 0.020),
+                                Text(
+                                  'Search',
+                                  style: TextStyle(
+                                    color: Utils.searchText,
+                                    fontSize: screenHeight * 0.030,
+                                    fontFamily: 'Century Gothic Bold',
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
+                          SizedBox(height: screenHeight * 0.020),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth * 0.040),
+                            child: SearchBarWidget(
+                              onchanged: () {},
+                              screenHeight: screenHeight,
+                              screenWidth: screenWidth,
+                              editingController: searchController,
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: screenHeight * 0.040,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: screenWidth * 0.080),
-                        child: Text(
-                          'Top Artists',
-                          style: TextStyle(
-                              letterSpacing: screenWidth * 0.005,
-                              color: Utils.white,
-                              fontFamily: 'Century Gothic Bold',
-                              fontSize: screenHeight * 0.025),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth * 0.050),
-                        child: GridViewWidget(
-                            screenHeight: screenHeight,
-                            screenWidth: screenWidth,
-                            isArtistGrid: true),
-                      )
-                    ],
+                    ),
                   ),
-                ),
+                  SizedBox(height: screenHeight * 0.020),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: screenWidth * 0.040),
+                    child: Text(
+                      'Top Artists',
+                      style: TextStyle(
+                        letterSpacing: screenWidth * 0.005,
+                        color: Utils.white,
+                        fontFamily: 'Century Gothic Bold',
+                        fontSize: screenHeight * 0.025,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: screenWidth * 0.040),
+                    child: GridViewWidget(
+                      screenHeight: screenHeight,
+                      screenWidth: screenWidth,
+                      isArtistGrid: true,
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.020),
+                ],
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }

@@ -22,7 +22,30 @@ class ApiService {
       print('Error Fetching Token ${e}');
     }
   }
+static updateToken({required String body}) async {
+    try {
+      final url = "${mainUrl}updateToken";
+      final clientUrl = Uri.parse(url);
 
+      final requestBody = json.encode({'token': body});
+
+      var response = await http.post(
+        clientUrl,
+        body: requestBody,
+        headers: {"Content-Type": "application/json"},
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        GlobalData.accessToken = responseData['token'][0]['token'];
+        print("Token : ${GlobalData.accessToken}");
+      } else {
+        print('Failed to update token: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error Fetching Token: ${e}');
+    }
+  }
   static getArtistId() async {
     try {
       final url = "${mainUrl}getArtist";
@@ -121,7 +144,7 @@ class ApiService {
       var response = await http.get(
         url,
         headers: {
-          'Authorization': 'Bearer 1232',
+          'Authorization': 'Bearer ${GlobalData.accessToken}',
           'Content-Type': 'application/json',
         },
       );
@@ -142,11 +165,36 @@ class ApiService {
           GlobalData.artist.add(artistData);
           print('${artist['name'].toString()} Details | ${artistData}');
         }
-      } else {
-        print('Failed to fetch artists: ${response.statusCode}');
+        return response.statusCode;
       }
+      return response.statusCode;
     } catch (e) {
       print('Error fetching artists: $e');
+      return e;
+    }
+  }
+
+  static refreshToken() async {
+    final url = 'https://accounts.spotify.com/api/token';
+    final clientUrl = Uri.parse(url);
+    var response = await http.post(clientUrl, headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization':
+          'Basic YmY5MThjNGQ3MDQ4NDA5Nzg1YzgxYmExMTk0YjI3Njk6ZjQwYzk1MTQ1ZDNmNDlkN2JiNGQ2NzZhNTY0MjI3YmY='
+    }, body: {
+      'grant_type': 'refresh_token',
+      'refresh_token':
+          'AQA3GEQS7rd_gXIyRx4o9aQIG8lLn3SD_x8EuPNk9GpJQA_jgN3xr08TR2ipH4KG7UK8bLRj85zdBnyRLYgC68tqdSy0TJrnnCmhGE0doXzf6XoiRSUm89tH7yPV4kd63o8'
+    });
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final newAccessToken = data['access_token'].toString();
+      GlobalData.accessToken = newAccessToken;
+      // Handle the new access token (e.g., save it to secure storage)
+      print('New access token: $newAccessToken');
+    } else {
+      print('Failed to refresh token: ${response.body}');
     }
   }
 }
