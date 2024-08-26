@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/Services/api.dart';
 import 'package:music_app/Services/local_Storage.dart';
 import 'package:music_app/View/Get%20In%20View/getin_view.dart';
 import 'package:music_app/View/Home%20View/home_view.dart';
 import 'package:music_app/View/On%20Boarding%20View/onboarding_view.dart';
 
 class SplashViewmodel with ChangeNotifier {
+  static gettingArtist() async {
+    await ApiService.getArtistId();
+  }
+
   static Future<bool> getOnBoardingStatus() async {
     try {
       bool onboardingStatus = await LocalStorage.getOnBoardingStatus();
@@ -23,14 +28,15 @@ class SplashViewmodel with ChangeNotifier {
       bool loginstatus = await LocalStorage.getLoginStatus();
       if (status == true && loginstatus == true) {
         print("Next Home");
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomeView()));
-      } else if(status == true && loginstatus == false) {
+           await SplashViewmodel.gettingArtist();
+
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const HomeView()));
+      } else if (status == true && loginstatus == false) {
         print("Next Get In");
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const GetinView()));
-      }
-      else{
+      } else {
         print("Next On Boarding");
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const OnboardingView()));

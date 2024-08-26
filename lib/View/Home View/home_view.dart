@@ -3,7 +3,7 @@ import 'package:music_app/Custom%20Widgets/bottom_bar.dart';
 import 'package:music_app/Custom%20Widgets/button_container.dart';
 import 'package:music_app/Custom%20Widgets/carousel_widget.dart';
 import 'package:music_app/Custom%20Widgets/grid_view.dart';
-import 'package:music_app/Services/user_data.dart';
+import 'package:music_app/Services/global_data.dart';
 import 'package:music_app/Services/utils.dart';
 import 'package:music_app/View/Explore%20View/explore_view.dart';
 import 'package:music_app/View/Home%20View/home_viewmodel.dart';
@@ -80,7 +80,7 @@ class _HomeViewState extends State<HomeView> {
                                   height: screenHeight * 0.001,
                                 ),
                                 Text(
-                                  UserData.userdata['fullname'],
+                                  GlobalData.userdata['fullname'],
                                   style: TextStyle(
                                       color: Utils.white.withOpacity(0.6),
                                       fontSize: screenHeight * 0.019,

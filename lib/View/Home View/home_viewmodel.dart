@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/Services/local_Storage.dart';
-import 'package:music_app/Services/user_data.dart';
+import 'package:music_app/Services/global_data.dart';
 import 'package:music_app/View/Explore%20View/explore_view.dart';
 import 'package:music_app/View/Home%20View/home_view.dart';
 
@@ -49,9 +49,9 @@ class HomeViewmodel with ChangeNotifier {
   }
 
   getStats() async {
-    if ((UserData.userdata['stats']['Continue_Listening'] == 0) &&
-        (UserData.userdata['stats']['Top_Mixes'] == 0) &&
-        (UserData.userdata['stats']['Based On Recent Listening'] == 0)) {
+    if ((GlobalData.userdata['stats']['Continue_Listening'] == 0) &&
+        (GlobalData.userdata['stats']['Top_Mixes'] == 0) &&
+        (GlobalData.userdata['stats']['Based On Recent Listening'] == 0)) {
       print('Have to Explore');
       isExplore = true;
     }

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:music_app/Services/user_data.dart';
+import 'package:music_app/Services/global_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 late final SharedPreferences prefs;
@@ -39,12 +39,12 @@ class LocalStorage {
     if (jsonString != null) {
       final Map userdata =
           jsonDecode(jsonString); // Convert JSON String back to Map
-      UserData.userdata.clear();
-      UserData.userdata.addAll(userdata);
-      print('User Data ${UserData.userdata}');
+      GlobalData.userdata.clear();
+      GlobalData.userdata.addAll(userdata);
+      print('User Data ${GlobalData.userdata}');
     } else {
-      UserData.userdata.clear();
-      print('User Data ${UserData.userdata}');
+      GlobalData.userdata.clear();
+      print('User Data ${GlobalData.userdata}');
     }
   }
 }
