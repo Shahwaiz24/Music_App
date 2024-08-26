@@ -11,6 +11,10 @@ class HomeViewmodel with ChangeNotifier {
     await LocalStorage.getUserData();
   }
 
+  stateSetter() {
+    notifyListeners();
+  }
+
   ontap({required index, required BuildContext context}) {
     selectedIndex = index;
     notifyListeners();
@@ -49,7 +53,7 @@ class HomeViewmodel with ChangeNotifier {
         (UserData.userdata['stats']['Top_Mixes'] == 0) &&
         (UserData.userdata['stats']['Based On Recent Listening'] == 0)) {
       print('Have to Explore');
-      // isExplore = true;
+      isExplore = true;
     }
   }
 }

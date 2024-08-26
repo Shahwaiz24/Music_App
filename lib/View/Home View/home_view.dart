@@ -5,6 +5,7 @@ import 'package:music_app/Custom%20Widgets/carousel_widget.dart';
 import 'package:music_app/Custom%20Widgets/grid_view.dart';
 import 'package:music_app/Services/user_data.dart';
 import 'package:music_app/Services/utils.dart';
+import 'package:music_app/View/Explore%20View/explore_view.dart';
 import 'package:music_app/View/Home%20View/home_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -124,46 +125,55 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
             ),
-         
             model.isExplore == true
-                ? Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'You Have to Explore First',
-                          style: TextStyle(
-                              color: Utils.white,
-                              fontFamily: 'Mulish Regular',
-                              fontSize: screenHeight * 0.020),
-                        ),
-                        SizedBox(
-                          height: screenHeight * 0.020,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.180),
-                          child: InkWell(
-                            onTap: () {
-                              print('Navigate to Explore');
-                            },
-                            child: ButtonContainer(
-                              isSimple: true,
-                              screenHeight: screenHeight,
-                              screenWidth: screenWidth,
-                              child: Center(
-                                child: Text(
-                                  'Explore',
-                                  style: TextStyle(
-                                      color: Utils.white,
-                                      fontFamily: 'Mulish Regular',
-                                      fontSize: screenHeight * 0.018),
+                ? SizedBox(
+                    height: screenHeight * .7,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'You Have to Explore First',
+                            style: TextStyle(
+                                color: Utils.white,
+                                fontFamily: 'Mulish Regular',
+                                fontSize: screenHeight * 0.020),
+                          ),
+                          SizedBox(
+                            height: screenHeight * 0.020,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth * 0.180),
+                            child: InkWell(
+                              onTap: () {
+                                model.selectedIndex = 1;
+                                model.stateSetter();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ExploreView()),
+                                );
+                              },
+                              child: ButtonContainer(
+                                isSimple: true,
+                                screenHeight: screenHeight,
+                                screenWidth: screenWidth,
+                                child: Center(
+                                  child: Text(
+                                    'Explore',
+                                    style: TextStyle(
+                                        color: Utils.white,
+                                        fontFamily: 'Mulish Regular',
+                                        fontSize: screenHeight * 0.018),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   )
                 : Padding(
