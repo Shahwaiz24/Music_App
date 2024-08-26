@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/Services/global_data.dart';
 import 'package:music_app/Services/utils.dart';
 
 class GridViewWidget extends StatefulWidget {
@@ -19,8 +20,7 @@ class _GridViewWidgetState extends State<GridViewWidget> {
   Widget build(BuildContext context) {
     return widget.isArtistGrid == true
         ? GridView.builder(
-          
-            itemCount: 6,
+            itemCount: GlobalData.artist.length,
             padding: EdgeInsets.only(top: widget.screenHeight * 0.020),
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
@@ -31,7 +31,6 @@ class _GridViewWidgetState extends State<GridViewWidget> {
                 mainAxisExtent:
                     widget.screenHeight * 0.230), // Increased height
             itemBuilder: (context, index) {
-              
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -40,11 +39,12 @@ class _GridViewWidgetState extends State<GridViewWidget> {
                         widget.screenWidth * 0.3, // Adjust the size as needed
                     height:
                         widget.screenWidth * 0.3, // Adjust the size as needed
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
                         alignment: Alignment.center,
-                        image: AssetImage('assets/image/yunus.png'),
+                        image: NetworkImage(
+                            GlobalData.artist[index]['Profile Pic']),
                         fit: BoxFit.cover, // Cover the container with the image
                       ),
                     ),
@@ -53,7 +53,8 @@ class _GridViewWidgetState extends State<GridViewWidget> {
                       height: widget.screenHeight *
                           0.010), // Space between image and text
                   Text(
-                    'Artist Name', // Replace with your artist name
+                    GlobalData.artist[index]
+                        ['Artist Name'], // Replace with your artist name
                     style: TextStyle(
                       fontFamily: 'Century Gothic Bold',
 

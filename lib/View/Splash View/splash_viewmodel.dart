@@ -6,7 +6,8 @@ import 'package:music_app/View/Home%20View/home_view.dart';
 import 'package:music_app/View/On%20Boarding%20View/onboarding_view.dart';
 
 class SplashViewmodel with ChangeNotifier {
-  static gettingArtist() async {
+  static gettingArtistandToken() async {
+    await ApiService.getToken();
     await ApiService.getArtistId();
   }
 
@@ -28,7 +29,7 @@ class SplashViewmodel with ChangeNotifier {
       bool loginstatus = await LocalStorage.getLoginStatus();
       if (status == true && loginstatus == true) {
         print("Next Home");
-           await SplashViewmodel.gettingArtist();
+        await SplashViewmodel.gettingArtistandToken();
 
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => const HomeView()));

@@ -5,8 +5,24 @@ import 'package:music_app/Services/global_data.dart';
 import 'package:music_app/http_model/http_model.dart';
 
 String mainUrl = "https://music-app-back-end.vercel.app/v1/api/";
+String spotifyUrl = 'https://api.spotify.com/v1/artists/';
 
 class ApiService {
+  static getToken() async {
+    try {
+      final url = "${mainUrl}getToken";
+      final clientUrl = Uri.parse(url);
+      var response = await http.get(clientUrl);
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        GlobalData.accessToken = responseData['token'][0]['token'];
+        print("Token : ${GlobalData.accessToken}");
+      }
+    } catch (e) {
+      print('Error Fetching Token ${e}');
+    }
+  }
+
   static getArtistId() async {
     try {
       final url = "${mainUrl}getArtist";
@@ -15,16 +31,17 @@ class ApiService {
           .get(clientUrl, headers: {"Content-Type": "application/json"});
       final responseData = json.decode(response.body);
       if (response.statusCode == 200) {
-        GlobalData.artist.clear();
+        GlobalData.artistId.clear();
         for (var i = 0; i < responseData["artist"].length; i++) {
-          GlobalData.artist.add(responseData["artist"][i]["artist_id"]);
+          GlobalData.artistId
+              .add(responseData["artist"][i]["artist_id"].toString());
         }
 
-        print('Successfuly Added | The List ${GlobalData.artist}');
+        print('Successfuly Added | The List ${GlobalData.artistId}');
       }
     } catch (e) {
       print('Getting Artist Error ${e}');
-      GlobalData.artist = [];
+      GlobalData.artistId = [];
     }
   }
 
@@ -87,5 +104,49 @@ class ApiService {
         };
       }
     } catch (e) {}
+  }
+
+  static getArtists() async {
+    try {
+      List<String> artistIds = GlobalData.artistId;
+
+      // Remove any URL encoding
+      // Join the list of artist IDs into a comma-separated string
+      String artistIdsString = artistIds.join(',');
+
+      // Remove any URL encoding
+      artistIdsString = Uri.decodeComponent(artistIdsString);
+      final url = Uri.parse('${spotifyUrl}?ids=$artistIdsString');
+      print("Url ${url}");
+      var response = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer 1232',
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+
+        // Process the artist data
+        List<dynamic> artists = responseData['artists'];
+        GlobalData.artist.clear();
+        for (var artist in artists) {
+          Map<String, dynamic> artistData = {
+            'Artist Name': artist['name'].toString(),
+            'Popularity': artist['popularity'].toString(),
+            'Followers': artist['followers']['total'].toString(),
+            'Profile Pic': artist['images'][0]['url'].toString(),
+            'Spotify URL': artist['external_urls']['spotify'].toString(),
+          };
+          GlobalData.artist.add(artistData);
+          print('${artist['name'].toString()} Details | ${artistData}');
+        }
+      } else {
+        print('Failed to fetch artists: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching artists: $e');
+    }
   }
 }

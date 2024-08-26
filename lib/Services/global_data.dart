@@ -1,4 +1,6 @@
 class GlobalData {
   static Map userdata = {};
-  static List artist = [];
+  static List<String> artistId = [];
+  static List<Map<String, dynamic>> artist = [];
+  static String accessToken = '';
 }
