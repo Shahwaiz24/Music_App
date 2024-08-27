@@ -163,7 +163,6 @@ static updateToken({required String body}) async {
             'Spotify URL': artist['external_urls']['spotify'].toString(),
           };
           GlobalData.artist.add(artistData);
-          print('${artist['name'].toString()} Details | ${artistData}');
         }
         return response.statusCode;
       }

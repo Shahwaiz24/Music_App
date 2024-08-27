@@ -25,12 +25,22 @@ class ExploreViewModel with ChangeNotifier {
   }
 
   refreshToken() async {
+    isError = false;
     isLoading = true;
     notifyListeners();
     await ApiService.refreshToken();
-    print(GlobalData.accessToken);
     await ApiService.updateToken(body: GlobalData.accessToken);
-    isLoading = false;
-    notifyListeners();
+    await Future.delayed(Duration(seconds: 1));
+    int code = await ApiService.getArtists();
+    if (code == 200) {
+      await Future.delayed(const Duration(seconds: 1));
+      isLoading = false;
+      notifyListeners();
+    } else {
+      isLoading = false;
+      print('Error Refreshing and Getting Artists Token');
+      isError = true;
+      notifyListeners();
+    }
   }
 }
