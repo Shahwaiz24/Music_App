@@ -57,6 +57,7 @@ class SplashViewmodel with ChangeNotifier {
       bool status = await SplashViewmodel.getOnBoardingStatus();
       bool loginstatus = await LocalStorage.getLoginStatus();
       if (status == true && loginstatus == true) {
+        
         bool wifi = await WifiService.checkWifiConnection();
 
         if (wifi == true) {

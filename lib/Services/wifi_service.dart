@@ -14,15 +14,13 @@ class WifiService {
     ];
 
     // Return true if connected to either WiFi or Mobile, else false
-    if (connectivityResult ==
-            [
-              ConnectivityResult.wifi,
-            ] ||
-        connectivityResult == [ConnectivityResult.mobile]) {
-      print('Connectivity Result ${connectivityResult}');
+    if (connectivityResult == [validConnections[0]] ||
+        connectivityResult == [validConnections[1]]) {
+      print('Connectivity True Result: $connectivityResult');
+
       return true;
     } else {
-      print('Connectivity Result ${connectivityResult}');
+      print('Connectivity False Result: $connectivityResult');
       return false;
     }
   }
