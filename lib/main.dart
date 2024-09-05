@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
         ChangeNotifierProvider(create: (_) => SignUpViewModel()),
         ChangeNotifierProvider(create: (_) => HomeViewmodel()),
-                ChangeNotifierProvider(create: (_) => ExploreViewModel()),
+        ChangeNotifierProvider(create: (_) => ExploreViewModel()),
 
       ],
       child: const MaterialApp(

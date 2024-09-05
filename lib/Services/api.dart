@@ -22,7 +22,8 @@ class ApiService {
       print('Error Fetching Token ${e}');
     }
   }
-static updateToken({required String body}) async {
+
+  static updateToken({required String body}) async {
     try {
       final url = "${mainUrl}updateToken";
       final clientUrl = Uri.parse(url);
@@ -46,6 +47,7 @@ static updateToken({required String body}) async {
       print('Error Fetching Token: ${e}');
     }
   }
+
   static getArtistId() async {
     try {
       final url = "${mainUrl}getArtist";
@@ -136,6 +138,7 @@ static updateToken({required String body}) async {
       // Remove any URL encoding
       // Join the list of artist IDs into a comma-separated string
       String artistIdsString = artistIds.join(',');
+      print("Artist id : ${GlobalData.artistId}");
 
       // Remove any URL encoding
       artistIdsString = Uri.decodeComponent(artistIdsString);

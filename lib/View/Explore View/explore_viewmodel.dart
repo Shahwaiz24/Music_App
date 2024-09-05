@@ -30,7 +30,7 @@ class ExploreViewModel with ChangeNotifier {
     notifyListeners();
     await ApiService.refreshToken();
     await ApiService.updateToken(body: GlobalData.accessToken);
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed( const Duration(seconds: 1));
     int code = await ApiService.getArtists();
     if (code == 200) {
       await Future.delayed(const Duration(seconds: 1));
