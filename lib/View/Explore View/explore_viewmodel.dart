@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_app/Services/api.dart';
 import 'package:music_app/Services/global_data.dart';
+import 'package:music_app/View/Track%20View/track_view.dart';
 
 class ExploreViewModel with ChangeNotifier {
   bool isLoading = false;
@@ -45,7 +46,7 @@ class ExploreViewModel with ChangeNotifier {
     }
   }
 
-  fetchingTrack({required int index}) async {
+  fetchingTrack({required int index, required BuildContext context}) async {
     try {
       isError = false;
       isLoading = true;
@@ -58,6 +59,8 @@ class ExploreViewModel with ChangeNotifier {
         isLoading = false;
         notifyListeners();
         print('List ${GlobalData.artistTracks}');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const TrackView()));
       } else {
         isLoading = false;
         print('Error Getting Tracks');

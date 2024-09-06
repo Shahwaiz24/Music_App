@@ -211,7 +211,7 @@ class _ExploreViewState extends State<ExploreView> {
                             horizontal: screenWidth * 0.040),
                         child: GridViewWidget(
                           ontapFunction: (int index) async {
-                          await  model.fetchingTrack(index: index);
+                          await  model.fetchingTrack(index: index, context: context);
                           },
                           screenHeight: screenHeight,
                           screenWidth: screenWidth,

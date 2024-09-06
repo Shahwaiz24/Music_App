@@ -7,7 +7,6 @@ import 'package:music_app/View/On%20Boarding%20View/onboarding_viewmodel.dart';
 import 'package:music_app/View/Sign%20Up%20View/signup_viewmodel.dart';
 import 'package:music_app/View/Splash%20View/splash_view.dart';
 import 'package:music_app/View/Splash%20View/splash_viewmodel.dart';
-import 'package:music_app/View/Track%20View/track_view.dart';
 import 'package:music_app/View/Track%20View/track_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: TrackView(),
+        home: SplashView(),
       ),
     );
   }
