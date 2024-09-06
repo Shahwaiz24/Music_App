@@ -30,12 +30,12 @@ class SplashViewmodel with ChangeNotifier {
             fontSize: MediaQuery.of(context).size.height * 0.020,
           ),
         ),
-        duration: const Duration(seconds: 2),
+        // duration: const Duration(seconds: 3),
       ),
     );
 
     // Wait for 2 seconds and then close the app
-    await Future.delayed(Duration(seconds: 3), () {
+    await Future.delayed( const Duration(seconds: 3), () {
       SystemNavigator.pop(); // Closes the app
     });
   }
