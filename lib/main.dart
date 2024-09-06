@@ -7,6 +7,8 @@ import 'package:music_app/View/On%20Boarding%20View/onboarding_viewmodel.dart';
 import 'package:music_app/View/Sign%20Up%20View/signup_viewmodel.dart';
 import 'package:music_app/View/Splash%20View/splash_view.dart';
 import 'package:music_app/View/Splash%20View/splash_viewmodel.dart';
+import 'package:music_app/View/Track%20View/track_view.dart';
+import 'package:music_app/View/Track%20View/track_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -14,6 +16,7 @@ void main() async {
   await LocalStorage.initialization();
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -28,11 +31,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SignUpViewModel()),
         ChangeNotifierProvider(create: (_) => HomeViewmodel()),
         ChangeNotifierProvider(create: (_) => ExploreViewModel()),
+        ChangeNotifierProvider(create: (_) => TrackViewmodel()),
+
 
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashView(),
+        home: TrackView(),
       ),
     );
   }

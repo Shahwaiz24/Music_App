@@ -40,7 +40,7 @@ class LoginViewModel with ChangeNotifier {
             await ApiService.login(body: body);
 
         if (response['status'] == 'Success') {
-        await  LocalStorage.saveUserData(data: response['user']);
+          await LocalStorage.saveUserData(data: response['user']);
           failureResponse = false;
           successResponse = true;
           await loginSave();
