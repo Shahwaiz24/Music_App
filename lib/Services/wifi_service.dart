@@ -13,7 +13,6 @@ class WifiService {
       ConnectivityResult.mobile
     ];
 
-    // Return true if connected to either WiFi or Mobile, else false
     if (connectivityResult == [validConnections[0]] ||
         connectivityResult == [validConnections[1]]) {
       print('Connectivity True Result: $connectivityResult');
