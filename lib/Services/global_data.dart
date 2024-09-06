@@ -3,4 +3,5 @@ class GlobalData {
   static List<String> artistId = [];
   static List<Map<String, dynamic>> artist = [];
   static String accessToken = '';
+  static List artistTracks = [];
 }

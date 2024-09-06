@@ -48,6 +48,40 @@ class ApiService {
     }
   }
 
+  static getArtistTracks({required String selectedId}) async {
+    try {
+      final url = "${spotifyUrl}${selectedId}/top-tracks";
+      final clientUrl = Uri.parse(url);
+      var response = await http.get(
+        clientUrl,
+        headers: {
+          'Authorization': 'Bearer ${GlobalData.accessToken}',
+          'Content-Type': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final track = data["tracks"] as List;
+        GlobalData.artistTracks.clear();
+        for (var i = 0; i < data['tracks'].length; i++) {
+          GlobalData.artistTracks.add({
+            'Track Name': track[i]['name'], // Track name
+            'Artist Name': track[i]['artists'][0]['name'], // Artist name
+            'Url': track[i]['preview_url'], // Preview URL for audio
+            'Popularity': track[i]['popularity'], // Popularity
+            'Image': track[i]['album']['images'][0]['url'], // Album image
+          });
+        }
+        return response.statusCode;
+      } else {
+        return response.statusCode;
+      }
+    } catch (e) {
+      print('Error While fetching Artist Track ${e}');
+      return e;
+    }
+  }
+
   static getArtistId() async {
     try {
       final url = "${mainUrl}getArtist";

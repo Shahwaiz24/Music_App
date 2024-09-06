@@ -31,7 +31,7 @@ class _ExploreViewState extends State<ExploreView> {
         body: FutureBuilder(
           future: model.fetchingArtist(),
           builder: (context, snapshot) {
-           return Consumer<ExploreViewModel>(builder: (context, model, child) {
+            return Consumer<ExploreViewModel>(builder: (context, model, child) {
               if (model.isLoading == true) {
                 return Center(
                   child: CircularProgressIndicator(
@@ -39,58 +39,108 @@ class _ExploreViewState extends State<ExploreView> {
                   ),
                 );
               } else if (model.isError == true) {
-                return Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.error_outline_rounded,
-                            color: Colors.red,
-                            size: screenHeight * 0.030,
-                          ),
-                          SizedBox(width: screenWidth * 0.020),
-                          Text(
-                            'An Error Occurred',
-                            style: TextStyle(
-                              color: Utils.white,
-                              fontSize: screenHeight * 0.020,
-                              fontFamily: 'Mulish Regular',
+                return model.isTrackError
+                    ? Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.error_outline_rounded,
+                                  color: Colors.red,
+                                  size: screenHeight * 0.030,
+                                ),
+                                SizedBox(width: screenWidth * 0.020),
+                                Text(
+                                  'An Error Occurred',
+                                  style: TextStyle(
+                                    color: Utils.white,
+                                    fontSize: screenHeight * 0.020,
+                                    fontFamily: 'Mulish Regular',
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: screenHeight * 0.020),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth * 0.150),
-                        child: InkWell(
-                          onTap: () async {
-                            await model.refreshToken();
-                            // await model.fetchingArtist();
-                          },
-                          child: ButtonContainer(
-                            isSimple: true,
-                            screenHeight: screenHeight,
-                            screenWidth: screenWidth,
-                            child: Center(
-                              child: Text(
-                                'Refresh',
-                                style: TextStyle(
-                                  fontFamily: 'Century Gothic Bold',
-                                  fontSize: screenHeight * 0.022,
-                                  color: Utils.white,
+                            SizedBox(height: screenHeight * 0.020),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: screenWidth * 0.150),
+                              child: InkWell(
+                                onTap: () async {},
+                                child: ButtonContainer(
+                                  isSimple: true,
+                                  screenHeight: screenHeight,
+                                  screenWidth: screenWidth,
+                                  child: Center(
+                                    child: Text(
+                                      'Refresh',
+                                      style: TextStyle(
+                                        fontFamily: 'Century Gothic Bold',
+                                        fontSize: screenHeight * 0.022,
+                                        color: Utils.white,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                );
+                      )
+                    : Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.error_outline_rounded,
+                                  color: Colors.red,
+                                  size: screenHeight * 0.030,
+                                ),
+                                SizedBox(width: screenWidth * 0.020),
+                                Text(
+                                  'An Error Occurred',
+                                  style: TextStyle(
+                                    color: Utils.white,
+                                    fontSize: screenHeight * 0.020,
+                                    fontFamily: 'Mulish Regular',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: screenHeight * 0.020),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: screenWidth * 0.150),
+                              child: InkWell(
+                                onTap: () async {
+                                  await model.refreshToken();
+                                  // await model.fetchingArtist();
+                                },
+                                child: ButtonContainer(
+                                  isSimple: true,
+                                  screenHeight: screenHeight,
+                                  screenWidth: screenWidth,
+                                  child: Center(
+                                    child: Text(
+                                      'Refresh',
+                                      style: TextStyle(
+                                        fontFamily: 'Century Gothic Bold',
+                                        fontSize: screenHeight * 0.022,
+                                        color: Utils.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
               } else {
                 return SingleChildScrollView(
                   child: Column(
@@ -160,6 +210,9 @@ class _ExploreViewState extends State<ExploreView> {
                         padding: EdgeInsets.symmetric(
                             horizontal: screenWidth * 0.040),
                         child: GridViewWidget(
+                          ontapFunction: (int index) async {
+                          await  model.fetchingTrack(index: index);
+                          },
                           screenHeight: screenHeight,
                           screenWidth: screenWidth,
                           isArtistGrid: true,
@@ -170,10 +223,7 @@ class _ExploreViewState extends State<ExploreView> {
                   ),
                 );
               }
-         
-         
             });
-          
           },
         ));
   }
