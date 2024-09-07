@@ -190,6 +190,7 @@ class ApiService {
 
         // Process the artist data
         List<dynamic> artists = responseData['artists'];
+        print('Artist Printing ${artists[0]}');
         GlobalData.artist.clear();
         for (var artist in artists) {
           Map<String, dynamic> artistData = {
@@ -197,8 +198,10 @@ class ApiService {
             'Popularity': artist['popularity'].toString(),
             'Followers': artist['followers']['total'].toString(),
             'Profile Pic': artist['images'][0]['url'].toString(),
+            'Artist Id' : artist['id'].toString(),
             'Spotify URL': artist['external_urls']['spotify'].toString(),
           };
+
           GlobalData.artist.add(artistData);
         }
         return response.statusCode;

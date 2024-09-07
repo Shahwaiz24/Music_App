@@ -59,8 +59,26 @@ class ExploreViewModel with ChangeNotifier {
         isLoading = false;
         notifyListeners();
         print('List ${GlobalData.artistTracks}');
+        String artist = '';
+        String artist_Pic = '';
+        for (var i = 0; i < GlobalData.artist.length; i++) {
+          if (artistId.toString() == GlobalData.artist[i]['Artist Id']) {
+            artist = GlobalData.artist[i]['Artist Name'];
+            artist_Pic = GlobalData.artist[i]['Profile Pic'];
+            // print('Artist Name : ${artist}');
+            // print('Artist Pic : ${artist_Pic}');
+
+            break;
+          }
+        }
+
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const TrackView()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => TrackView(
+                      artist_Name: artist,
+                      artist_Pic: artist_Pic,
+                    )));
       } else {
         isLoading = false;
         print('Error Getting Tracks');
