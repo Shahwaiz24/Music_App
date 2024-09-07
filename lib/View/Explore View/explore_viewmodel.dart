@@ -61,10 +61,12 @@ class ExploreViewModel with ChangeNotifier {
         print('List ${GlobalData.artistTracks}');
         String artist = '';
         String artist_Pic = '';
+        var artist_genres = [];
         for (var i = 0; i < GlobalData.artist.length; i++) {
           if (artistId.toString() == GlobalData.artist[i]['Artist Id']) {
             artist = GlobalData.artist[i]['Artist Name'];
             artist_Pic = GlobalData.artist[i]['Profile Pic'];
+            artist_genres = GlobalData.artist[i]['Genres'];
             // print('Artist Name : ${artist}');
             // print('Artist Pic : ${artist_Pic}');
 
@@ -78,6 +80,7 @@ class ExploreViewModel with ChangeNotifier {
                 builder: (context) => TrackView(
                       artist_Name: artist,
                       artist_Pic: artist_Pic,
+                      artist_genres : artist_genres,
                     )));
       } else {
         isLoading = false;

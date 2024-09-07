@@ -6,10 +6,14 @@ import 'package:provider/provider.dart';
 
 class TrackView extends StatefulWidget {
   const TrackView(
-      {super.key, required this.artist_Name, required this.artist_Pic});
+      {super.key,
+      required this.artist_Name,
+      required this.artist_Pic,
+      required this.artist_genres});
 
   final String artist_Pic;
   final String artist_Name;
+  final List artist_genres;
 
   @override
   State<TrackView> createState() => _TrackViewState();
@@ -73,27 +77,35 @@ class _TrackViewState extends State<TrackView> {
                         widget.artist_Pic.toString(),
                       ),
                       fit: BoxFit.fill),
-
-                  // color: Utils.bluePrimary,
-
-                  border: Border.all(color: Utils.white, width: 1),
-                  // borderRadius: BorderRadius.circular(100)
                 ),
-              
               ),
             ),
             SizedBox(
               height: screenHeight * 0.030,
             ),
             Center(
-              child: Text(
-                widget.artist_Name.toString(),
-                style: TextStyle(
-                    color: Utils.white,
-                    fontSize: screenHeight * 0.030,
-                    fontFamily: 'Century Gothic Bold'),
-              ),
-            )
+                child: Column(
+              children: [
+                Text(
+                  widget.artist_Name.toString(),
+                  style: TextStyle(
+                      color: Utils.white,
+                      fontSize: screenHeight * 0.030,
+                      fontFamily: 'Century Gothic Bold'),
+                ),
+                SizedBox(
+                  height: screenHeight * 0.010,
+                ),
+                Text(
+                  '${widget.artist_genres[0]}, ${widget.artist_genres[1]}',
+                  style: TextStyle(
+                      color: Utils.white.withOpacity(0.6),
+                      fontFamily: 'Century Gothic Bold',
+                      fontSize: screenHeight * 0.020),
+                ),
+              ],
+            )),
+            
           ],
         ),
       ),

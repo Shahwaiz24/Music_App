@@ -199,6 +199,7 @@ class ApiService {
             'Followers': artist['followers']['total'].toString(),
             'Profile Pic': artist['images'][0]['url'].toString(),
             'Artist Id' : artist['id'].toString(),
+            'Genres' : artist['genres'],
             'Spotify URL': artist['external_urls']['spotify'].toString(),
           };
 
